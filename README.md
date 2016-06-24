@@ -69,7 +69,7 @@ Here's a tutorial on adding directories to PATH (Windows)</a>
 Feel free to fork the repository and include your own hacker-scripts or make any improvisations in the code. Once done you can make a pull
 request. Make sure to add the script description in the `hs-help.py` script and also a detailed description of your script or/and the 
 improvisations you made in the script(s).
-<hr>
+
 Cheers :coffee:
 <hr>
 **Developer**: Areeb Beigh<br>
