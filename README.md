@@ -62,7 +62,7 @@ and their functions type `hs-help` in the terminal and hit enter.
 Sometimes the setup may not be able to add the directories C:\hacker-scripts and C:\hacker-scripts\bin to the system PATH, in that case
 you will have to do this manually.
 
-<a href="windowsitpro.com/systems-management/how-can-i-add-new-folder-my-system-path">
+<a href="www.windowsitpro.com/systems-management/how-can-i-add-new-folder-my-system-path">
 Here's a tutorial on adding directories to PATH (Windows)</a>
 
 ## Contributing
