@@ -17,7 +17,7 @@ To install hacker-scripts run `> python setup.py install`
 
 Note: After installation you will have to close the terminal and open a new one to use any of the commands. If you are not able to use the commands i.e you get a "command does not exist" kind of error then add C:\hacker-scripts and C:\hacker-scripts\bin (Windows) to PATH manually.
 
-<a href="https://github.com/areeb-beigh/hacker-scripts#possible-snags">Check this</a>
+<a href="#possible-snags">Check this</a>
 
 To view the help documentation type `hs-help` and hit enter.
 
@@ -62,7 +62,7 @@ and their functions type `hs-help` in the terminal and hit enter.
 Sometimes the setup may not be able to add the directories C:\hacker-scripts and C:\hacker-scripts\bin to the system PATH, in that case
 you will have to do this manually.
 
-<a href="www.windowsitpro.com/systems-management/how-can-i-add-new-folder-my-system-path">
+<a href="http://windowsitpro.com/systems-management/how-can-i-add-new-folder-my-system-path" target="_blank">
 Here's a tutorial on adding directories to PATH (Windows)</a>
 
 ## Contributing
