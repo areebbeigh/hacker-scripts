@@ -15,9 +15,9 @@ accessed directly from the terminal with ease.
 
 To install hacker-scripts run `> python setup.py install`
 
-Note: After installation you will have to close the terminal and open a new one to use any of the commands. If you are not able to use the
-commands i.e you get a "command does not exist" kind of error then add C:\hacker-scripts and C:\hacker-scripts\bin (Windows) to your PATH
-manually.
+Note: After installation you will have to close the terminal and open a new one to use any of the commands. If you are not able to use the commands i.e you get a "command does not exist" kind of error then add C:\hacker-scripts and C:\hacker-scripts\bin (Windows) to PATH manually.
+
+<a href="https://github.com/areeb-beigh/hacker-scripts#possible-snags">Check this</a>
 
 To view the help documentation type `hs-help` and hit enter.
 
