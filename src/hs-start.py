@@ -23,7 +23,7 @@ Config.read("config.ini")
 # List of programs/files to be opened (will be filled later)
 files = []
 
-# Appends all program/file paths from config.ini [hs-start] to 'files'
+# Appends all program/file paths from the config.ini [hs-start] section to 'files'
 for option in Config.options("hs-start"):
 	if (Config.get("hs-start", option) != ""):
 		files.append(Config.get("hs-start", option))
@@ -35,7 +35,6 @@ def execute():
 	# If at least one program/file has been specified in config.ini then ...
 	if (len(files) > 0):
 		for file in files:
-
 			# If the program/file exist then ...
 			if os.path.isfile(file) == True:
 				print("{0} Opening {1}".format(whiteSpace, file))

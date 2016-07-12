@@ -7,7 +7,7 @@ Prints a brief help documentation to the terminal
 
 def main():
     print("""
-    Python hacker-scripts by Areeb - github.com/areeb-beigh
+    Python hacker-scripts by Areeb - github.com/areeb-beigh/hacker-scripts (Feel free to contribute)
 
     This is a collection of mini-scripts written in Python intended to make
     frequently used or random tasks such as playing music, launching programs you use
@@ -17,14 +17,14 @@ def main():
     ---------
     Currently available commands:
 
-    > hs-browse         Opens the URLs you specify in config.ini with the default browser
-    > hs-config         Creates a new config.ini file in C:\hacker-scripts
+    > hs-browse         Opens the URLs in the configuration file
+    > hs-config         Creates (or overwrites) a config.ini file in <root directory>\\hacker-scripts
     > hs-desktop        Manages your desktop files by placing different file types to their respective directories
     > hs-help           Displays this help documentation
-    > hs-music          Creates and launches a temporary playlist of the mp3 files in the directory specified in config.ini
-    > hs-start          Launches the programs listed in config.ini
-    > hs-wallpaper      Chooses and sets a random wallpaper from the wallpapers directory specified in config.ini
-    > hs-work           Opens all the files specified in config.ini
+    > hs-music          Creates and launches a temporary playlist of the mp3 files in the directory in the configuration
+    > hs-start          Launches the programs listed in the configuration
+    > hs-wallpaper      Chooses and sets a random wallpaper from the wallpapers directory specified in the configuration
+    > hs-work           Opens all the files specified with the text editor (both are set in the configuration)
 
     All the above scripts depend on the config.ini file located in C:\hacker-scripts. You can edit the file anytime and
     the scripts will automatically run according to the new configuration.

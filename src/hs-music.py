@@ -21,7 +21,7 @@ whiteSpace = "    "
 # Reads/Loads the config.ini configuration file
 Config.read("config.ini")
 
-# Gets the music directory from config.ini
+# Gets the music directory from the config.ini [hs-music] section
 directory = Config.get("hs-music", "directory")
 
 def main():
@@ -29,7 +29,7 @@ def main():
 
 def execute():
 	# If the directory has been specified in config.ini then ...
-	if (directory != ""):
+	if (directory):
 		# Gets a list of the files in the specified directory
 		files = os.listdir(directory)
 		
@@ -39,24 +39,20 @@ def execute():
 		print("{0} Playing {1}".format(whiteSpace, directory))
 
 		# Creates a temporary playlist
-		playlist = open('playlist.m3u', 'w')
-		playlist.truncate()
-
-		for file in files:
-			# If the file has a .mp3 extension then ...
-			if (file.endswith('.mp3') or file.endswith(".MP3")):
-
-				# Writes the file path to the temporary playlist.m3u
-				playlist.write(directory + '\\' + file + '\n')
-				fileCount += 1
+		with open('playlist.m3u', 'w+') as playlist:
+			for file in files:
+				# If the file has a .mp3 extension then ...
+				if (file.endswith('.mp3') or file.endswith(".MP3")):
+					# Writes the file path to the temporary playlist.m3u
+					playlist.write(os.path.join(directory, file) + '\n')
+					fileCount += 1
 		
 		# Print the number of mp3 files added to playlist.m3u
 		print("{0} {1} mp3 files detected".format(whiteSpace, fileCount))
 		playlist.close()
 
-		# Opens the file with the default media player
-		os.startfile('playlist.m3u')
-		os.startfile('bin\delete_playlist.py')
+		os.startfile('playlist.m3u') 			# Opens the file with the default media player
+		os.startfile('bin\delete_playlist.py')	# delete_playlist.py deletes the temporary playlist
 
 	# If the directory is not specified in config.ini then ...
 	else:

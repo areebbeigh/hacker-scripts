@@ -2,8 +2,8 @@
 # Created: 10th April 2016
 
 '''
-Description: Chooses a random image file from the directory specified in 
-config.ini [hs-wallpaper] and sets it as the desktop background 
+Description: Chooses a random image file from the directory specified in the
+config.ini [hs-wallpaper] section and sets it as the desktop background 
 '''
 
 import ctypes, os, random, configparser, sys
@@ -21,7 +21,7 @@ whiteSpace = "    "
 # Reads/Loads the config.ini configuration file
 Config.read("config.ini")
 
-# Gets the directory containing the wallpapers from config.ini
+# Gets the directory containing the wallpapers from the config.ini [hs-wallpaper] seciton
 wallpaperDirectory = Config.get("hs-wallpaper", "directory")
 
 # List of wallpapers (will be filled later)

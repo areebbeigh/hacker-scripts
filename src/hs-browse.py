@@ -23,9 +23,9 @@ Config.read("config.ini")
 # List of URLs to open (will be filled later)
 urls = []
 
-# Appends all URLs from config.ini [hs-browse] to 'urls'
+# Appends all URLs from the config.ini [hs-browse] section to 'urls'
 for option in Config.options("hs-browse"):
-	if (Config.get("hs-browse", option) != ""):
+	if (Config.get("hs-browse", option)):
 		urls.append(Config.get("hs-browse", option))
 
 def main():

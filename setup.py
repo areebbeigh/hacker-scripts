@@ -5,16 +5,13 @@ from sys import argv
 script, arguement = argv
 
 # Gets the root directory (Drive letter for Windows)
-rootDirectory = os.path.splitdrive(sys.executable)[0]
+rootDirectory = os.path.splitdrive(sys.executable)[0] + "\\"
 
-# Changes the current working directory
-#os.chdir(rootDirectory)
+# mainDirectory is <root directory>\hacker-scripts (Windows)
+mainDirectory = os.path.join(rootDirectory, "hacker-scripts")
 
-# mainDirectory = C:\hacker-scripts (Windows)
-mainDirectory = os.path.join(rootDirectory + "\\hacker-scripts")
-
-# binDirectory = C:\hacker-scripts\bin (Windows)
-binDirectory = os.path.join(mainDirectory + "\\bin")
+# binDirectory is <root directory>\hacker-scripts\bin (Windows)
+binDirectory = os.path.join(mainDirectory, "bin")
 
 def main():
     # If the directory hacker-scripts already exists in the root directory then ...
@@ -25,7 +22,7 @@ def main():
         # Changes user provided input to upper case
         choice = input().upper()
 
-        if(choice == "Y" or choice == "YES"):
+        if(choice in "Y YES".split()):
             # Removes the entire directory tree
             shutil.rmtree(mainDirectory)
             # Proceed with the installation
@@ -54,9 +51,8 @@ def install():
             else:
                 shutil.copy(script, mainDirectory)
 
-    # Add C:\hacker-scripts and C:\hacker-scripts\bin to PATH
+    # Adds C:\hacker-scripts and <root directory>\hacker-scripts\bin to PATH
     path = os.environ['PATH']
-
     os.system("setx PATH \"\"")
     os.system("setx PATH \"{};{};{}\"".format(path, mainDirectory, binDirectory))
 
@@ -66,9 +62,7 @@ def install():
     If you face any problems after installation please check the documentation at github.com/areeb-beigh/hacker-scripts 
     """)
 
-    choice = input()
-
 if arguement == "install":
     main()
 else:
-    print("Error: Invalid arguement, pass arguement \"install\" to install hacker-scripts")
+    raise ValueError("Invalid arguement, pass arguement \"install\" to install hacker-scripts")

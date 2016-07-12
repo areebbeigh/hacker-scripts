@@ -24,21 +24,37 @@ Config.read("config.ini")
 desktop = os.path.join(os.environ['USERPROFILE'], "Desktop")
 whiteSpace = "    "
 
-# Paths/Directories for different file types are loaded from config.ini
-paths = { "images": Config.get("hs-desktop", "Images_Directory"),
-	"videos": Config.get("hs-desktop", "Videos_Directory"),
-	"textFiles": Config.get("hs-desktop", "Files_Directory"),
+# Paths/Directories for different file types are loaded from the config.ini [hs-desktop] seciton
+paths = { 
+	"images": Config.get("hs-desktop", "images_directory"),
+	"videos": Config.get("hs-desktop", "videos_directory"),
+	"textFiles": Config.get("hs-desktop", "files_directory"),
 	}
 
 # Different extension types for different file types
-imageExtensions = [".png", ".jpg", ".gif"]
+imageExtensions = [
+		".png", 
+		".jpg", 
+		".gif",
+		]
 videoExtensions = [
-		".avi", ".mp4", ".mkv", 
-		".flv", ".wmv", ".m4v", 
-		".mpg", ".3gp", ".3g2", 
+		".avi", 
+		".mp4", 
+		".mkv", 
+		".flv", 
+		".wmv", 
+		".m4v", 
+		".mpg", 
+		".3gp", 
+		".3g2", 
 		".f4v"
 		]
-textFileExtensions = [".txt", ".ppt", ".doc", ".xls"]
+textFileExtensions = [
+		".txt", 
+		".ppt", 
+		".doc", 
+		".xls",
+		]
 
 def main():
 	execute()
@@ -51,37 +67,35 @@ def execute():
 		files = os.listdir(desktop)
 		
 		for file in files:
-			# Prepares a full path to the file in desktop
-			filePath = desktop + "\\" + file
+			# Creates a full path to the file in desktop
+			filePath = os.path.join(desktop, file)
 
 			# If the file is not a directory then ...
 			if not(os.path.isdir(file)):
 				# Splits file path and file extension
 				fileName, fileExtension = os.path.splitext(filePath)
 
-				''' 
-				Further we check if the extension of the file is mentioned in a any of the extension
-				lists above and then we put the file in the respective directory
-				'''
+				# Further we check if the extension of the file is mentioned in a any of the extension
+				# lists above and then we put the file in the respective directory
 
 				# Check for images
 				if fileExtension.lower() in imageExtensions:
-					newLocation = paths["images"] + "\\" + file
+					newLocation = os.path.join(paths["images"], file)
 
 				# Check for videos
 				elif fileExtension.lower() in videoExtensions:
-					newLocation = paths["videos"] + "\\" + file
+					newLocation = os.path.join(paths["videos"], file)
 
 				# Check for text files
 				elif fileExtension.lower() in textFileExtensions:
-					newLocation = paths["textFiles"] + "\\" + file
+					newLocation = os.path.join(paths["textFiles"], file)
 
-				# The file type is unknown to the program
+				# If the file type is unknown to the program then we skip it
 				else:
 					newLocation = None
 				
 				# If the file type is not unknown then ...
-				if newLocation != None:
+				if (newLocation):
 					try:
 						# This moves the file to "newLocation"
 						os.rename(filePath, newLocation)
@@ -90,7 +104,7 @@ def execute():
 							os.path.basename(filePath)))
 
 					# If the file already exists then we rename the file we're operating on
-					except WindowsError:
+					except (WindowsError):
 						fileName, fileExtension = os.path.splitext(newLocation)
 						oldLocation = newLocation
 						# Randomly append an integer to the end of the file name

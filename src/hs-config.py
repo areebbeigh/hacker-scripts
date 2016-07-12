@@ -2,7 +2,8 @@
 # Created: 11th June 2016
 
 '''
-This script creates a new config.ini file with the default settings which you have to edit later
+Description :This script creates (or overwrites) a config.ini file with the 
+default settings which has to be edited later
 '''
 import os, configparser, sys
 
@@ -18,42 +19,44 @@ currentDirectory = os.getcwd()
 configFile = "config.ini"
 filePath = os.path.join(currentDirectory, configFile)
 
-# Creates a new config file
 def createFile():
-            configFile = open(filePath, 'w')
-            configFile.truncate()   # Clears the config file
+            """
+            Function to create a new configuration file
+            """
 
-            configFile.write("# You can add as many parameters as you want to CERTAIN sections but they must be in series\n")
-            
-            # Add settings and parameters the the config file
-            Config.add_section("hs-browse")
-            Config.set("hs-browse", "URL1", "")
-            Config.set("hs-browse", "URL2", "")
-            Config.set("hs-browse", "URL3", "")
+            with open("config.ini", "w") as configFile:
 
-            Config.add_section("hs-music")
-            Config.set("hs-music", "directory", "")
+                configFile.write("# You can add as many parameters as you want to CERTAIN sections but they must be in series\n")
+                
+                # Add settings and parameters the the config file
+                Config.add_section("hs-browse")
+                Config.set("hs-browse", "url1", "")
+                Config.set("hs-browse", "url2", "")
+                Config.set("hs-browse", "url3", "")
 
-            Config.add_section("hs-desktop")
-            Config.set("hs-desktop", "Files_Directory", "")
-            Config.set("hs-desktop", "Images_Directory", "")
-            Config.set("hs-desktop", "Videos_Directory", "")
+                Config.add_section("hs-music")
+                Config.set("hs-music", "directory", "")
 
-            Config.add_section("hs-start")
-            Config.set("hs-start", "Program1", "")
-            Config.set("hs-start", "Program2", "")
-            Config.set("hs-start", "Program3", "")
+                Config.add_section("hs-desktop")
+                Config.set("hs-desktop", "files_directory", "")
+                Config.set("hs-desktop", "images_directory", "")
+                Config.set("hs-desktop", "videos_directory", "")
 
-            Config.add_section("hs-wallpaper")
-            Config.set("hs-wallpaper", "directory", "")
+                Config.add_section("hs-start")
+                Config.set("hs-start", "program1", "")
+                Config.set("hs-start", "program2", "")
+                Config.set("hs-start", "program3", "")
 
-            Config.add_section("hs-work")
-            Config.set("hs-work", "Project1", "")
-            Config.set("hs-work", "Project2", "")
-            Config.set("hs-work", "Project3", "")
-            
-            Config.write(configFile)
-            configFile.close()
+                Config.add_section("hs-wallpaper")
+                Config.set("hs-wallpaper", "directory", "")
+
+                Config.add_section("hs-work")
+                Config.set("hs-work", "editor", "C:\\Program Files\\Sublime Text 3\\sublime_text.exe")
+                Config.set("hs-work", "project1", "")
+                Config.set("hs-work", "project2", "")
+                Config.set("hs-work", "project3", "")
+                
+                Config.write(configFile)
 
             print("Config file has been created at " + filePath)
             print("You can go ahead and configure the file.")
