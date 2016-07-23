@@ -6,23 +6,13 @@ Description: Manages your desktop by automatically placing different
 files to their respective directories in config.ini [Manage_Dekstop]
 '''
 
-import os, random, configparser, sys
+import os, random, initialize
 
-# Gets the root directory (Drive letter in case of windows)
-rootDirectory = os.path.splitdrive(sys.executable)[0]
-
-# Changes the current working directory
-os.chdir(os.path.join(rootDirectory, "\\hacker-scripts"))
-
-# Creates an instance of ConfigParser()
-Config = configparser.ConfigParser()
-
-# Reads/Loads the config.ini configuration file
-Config.read("config.ini")
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # Gets the path to Desktop
 desktop = os.path.join(os.environ['USERPROFILE'], "Desktop")
-whiteSpace = "    "
 
 # Paths/Directories for different file types are loaded from the config.ini [hs-desktop] seciton
 paths = { 

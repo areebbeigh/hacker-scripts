@@ -3,19 +3,13 @@
 
 '''
 Description: Opens all the project files in config.ini [hs-work] with 
-Sublime Text Editor (default path)
+the text editor specified
 '''
 
-import os, configparser, sys
+import os, initialize
 
-# Gets the root directory (Drive letter in case of windows)
-rootDirectory = os.path.splitdrive(sys.executable)[0]
-
-# Changes the current working directory
-os.chdir(os.path.join(rootDirectory, "\\hacker-scripts"))
-
-# Creates an instanec of ConfigParser()
-Config = configparser.ConfigParser()
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # Reads/Loads the config.ini configuration file
 Config.read("config.ini")

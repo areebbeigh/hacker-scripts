@@ -6,20 +6,10 @@ Description: Makes a temporary playlist of the music files in the folder in
 config.ini [hs-music] and opens it with the default media player  
 '''
 
-import os, configparser, sys
+import os, configparser, initialize
 
-# Gets the root directory (Drive letter in case of windows)
-rootDirectory = os.path.splitdrive(sys.executable)[0]
-
-# Changes the current working directory
-os.chdir(os.path.join(rootDirectory, "\\hacker-scripts"))
-
-# Creates an instance of ConfigParser()
-Config = configparser.ConfigParser()
-whiteSpace = "    "
-
-# Reads/Loads the config.ini configuration file
-Config.read("config.ini")
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # Gets the music directory from the config.ini [hs-music] section
 directory = Config.get("hs-music", "directory")
@@ -51,8 +41,10 @@ def execute():
 		print("{0} {1} mp3 files detected".format(whiteSpace, fileCount))
 		playlist.close()
 
-		os.startfile('playlist.m3u') 			# Opens the file with the default media player
-		os.startfile('bin\delete_playlist.py')	# delete_playlist.py deletes the temporary playlist
+		# Opens the file with the default media player
+		os.startfile('playlist.m3u')
+		# delete_playlist.py deletes the temporary playlist
+		os.system("START \"delete_playlist.py\" /MIN python \"bin\\delete_playlist.py\"")
 
 	# If the directory is not specified in config.ini then ...
 	else:

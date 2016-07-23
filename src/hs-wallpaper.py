@@ -6,20 +6,10 @@ Description: Chooses a random image file from the directory specified in the
 config.ini [hs-wallpaper] section and sets it as the desktop background 
 '''
 
-import ctypes, os, random, configparser, sys
+import ctypes, os, random, initialize
 
-# Gets the root directory (Drive letter in case of windows)
-rootDirectory = os.path.splitdrive(sys.executable)[0]
-
-# Changes the current working directory
-os.chdir(os.path.join(rootDirectory, "\\hacker-scripts"))
-
-# Creates an instance of ConfigParser()
-Config = configparser.ConfigParser()
-whiteSpace = "    "
-
-# Reads/Loads the config.ini configuration file
-Config.read("config.ini")
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # Gets the directory containing the wallpapers from the config.ini [hs-wallpaper] seciton
 wallpaperDirectory = Config.get("hs-wallpaper", "directory")
@@ -52,7 +42,7 @@ def execute(givenDir=wallpaperDirectory):
 		check()
 
 		# Chooses a random wallpaper from the list of wallpapers
-		randomWallpaper = wallpapers[random.randint(0, len(wallpapers)) - 1]
+		randomWallpaper = random.choice(wallpapers)
 
 		print("{0} Setting {1} as random desktop wallpaper...".format(whiteSpace, randomWallpaper))
 

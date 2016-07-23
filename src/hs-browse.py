@@ -5,20 +5,10 @@
 Description: Opens all the URLs listed in config.ini [Browser] section
 '''
 
-import webbrowser, configparser, os, sys
+import webbrowser, initialize
 
-# Gets the root directory (Drive letter in case of windows)
-rootDirectory = os.path.splitdrive(sys.executable)[0]
-
-# Changes the current working directory
-os.chdir(os.path.join(rootDirectory, "\\hacker-scripts"))
-
-# Creates an instance of ConfigParser()
-Config = configparser.ConfigParser()
-whiteSpace = "    "
-
-# Reads/Loads the config.ini configuration file
-Config.read("config.ini")
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # List of URLs to open (will be filled later)
 urls = []
