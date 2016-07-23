@@ -22,6 +22,7 @@ def main():
     > hs-desktop        Manages your desktop files by placing different file types to their respective directories
     > hs-help           Displays this help documentation
     > hs-music          Creates and launches a temporary playlist of the mp3 files in the directory in the configuration
+    > hs-schedule       Creates a new windows scheduled task that executes a hacker-scripts cmd at a time in the future
     > hs-start          Launches the programs listed in the configuration
     > hs-wallpaper      Chooses and sets a random wallpaper from the wallpapers directory specified in the configuration
     > hs-work           Opens all the files specified with the text editor (both are set in the configuration)
