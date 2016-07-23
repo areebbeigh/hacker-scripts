@@ -17,7 +17,8 @@ def main():
     # If the directory hacker-scripts already exists in the root directory then ...
     if (os.path.exists(mainDirectory)):
         # Asks the user whether to overrite the directory 
-        print("A directory named \"hacker-scripts\" already exists in {}, do you want to replace it? (y/N)".format(rootDirectory))
+        print("A directory named \"hacker-scripts\" already exists in " +
+        "{}, do you want to replace it? (y/N)".format(rootDirectory))
 
         # Changes user provided input to upper case
         choice = input().upper()
@@ -53,8 +54,10 @@ def install():
 
     # Adds C:\hacker-scripts and <root directory>\hacker-scripts\bin to PATH
     path = os.environ['PATH']
-    os.system("setx PATH \"\"")
-    os.system("setx PATH \"{};{};{}\"".format(path, mainDirectory, binDirectory))
+
+    if(mainDirectory not in path.split(";") and binDirectory not in path.split()):
+        os.system("setx PATH \"\"")
+        os.system("setx PATH \"{};{};{}\"".format(path, mainDirectory, binDirectory))
 
     print("""
     The installation was successful, you can use the command \"hs-help\" in a new terminal to view the help documentation
