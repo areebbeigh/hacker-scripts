@@ -6,9 +6,10 @@ Opens all the project files in config.ini [hs-work] with  the text editor
 specified in config.ini
 '''
 
-import os
+import os, initialize
 
-from initialize import *
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # Reads/Loads the config.ini configuration file
 Config.read("config.ini")
@@ -37,7 +38,6 @@ def execute(files=files):
 	# If at least one file is specified in config.ini then ...
 	if (len(files) > 0):
 		for file in files:
-			print("{0} Opening {1}".format(whiteSpace, file))
 			os.system('START "" "{0}" "{1}"'.format(editor, file))
 	
 	# If no files are specified in config.ini

@@ -6,58 +6,53 @@ Chooses a random image file from the directory specified in the config.ini
 [hs-wallpaper] section and sets it as the desktop background 
 '''
 
-import ctypes
-import os
-import random
+import ctypes, os, random, initialize
 
-from initialize import *
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # Gets the directory containing the wallpapers from the config.ini 
 # [hs-wallpaper] seciton
 wallpaperDirectory = Config.get("hs-wallpaper", "directory")
 
+# List of wallpapers (will be filled later)
+wallpapers = []
+
 def main():
 	execute()
 
-def getWallpapers(givenDir):
-	"""Iterates over the directory of wallpapers tree and returns a list of 
-	the wallpapers / images"""
+# Iterates over the directory of wallpapers tree and gets a list of 
+# the wallpapers / images
+def check(givenDir=wallpaperDirectory):
 	files = os.listdir(givenDir)
-	wallpapers = []
 
 	for file in files:
-		file = os.path.join(givenDir, file)
-		extensions = [".jpg", ".png"]
+		directory = givenDir + "\\" + file
 
 		# Calls check() recursively on subdirectories
-		if(os.path.isdir(file)):
-			wallpapers.extend(getWallpapers(file))
+		if os.path.isdir(directory):
+			check(directory)
 		
 		# If the file is an image file then ...
-		elif(os.path.splitext(file)[1].lower() in extensions):
-			wallpapers.append(file)
+		elif file.endswith(".jpg") or file.endswith(".JPG") or file.endswith(".png") or file.endswith(".PNG"):
+			wallpaper = directory
+			wallpapers.append(wallpaper)
 
-	return wallpapers
-
-def execute():
+def execute(givenDir=wallpaperDirectory):
 	# If the wallpaper directory is specified in config.ini then ...
-	if (wallpaperDirectory):
-		wallpapers = getWallpapers(wallpaperDirectory)
+	if (wallpaperDirectory != ""):
+		check()
 
 		# Chooses a random wallpaper from the list of wallpapers
 		randomWallpaper = random.choice(wallpapers)
 
 		print("{0} Setting {1} as random desktop wallpaper...".format(
-			whiteSpace, 
-			randomWallpaper))
+			whiteSpace, randomWallpaper))
 
 		SPI_SETDESKWALLPAPER = 20
 
 		ctypes.windll.user32.SystemParametersInfoW(
-			SPI_SETDESKWALLPAPER, 
-			0, 
-			randomWallpaper, 
-			0)
+			SPI_SETDESKWALLPAPER, 0, randomWallpaper , 0)
 
 	# If the wallpaper directory is not specified in config.ini then ...
 	else:

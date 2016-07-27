@@ -8,10 +8,7 @@ delete the playlist.m3u file after calling os.system() on it, hence, we wait for
 This script is seperate because if it is put in hs-music.py then the user has to 
 wait for 20 seconds to be able to use the command line again.
 '''
-
-import os
-import time 
-import sys
+import os, time, sys
 
 # Gets the root directory (Drive letter in case of windows)
 rootDirectory = os.path.splitdrive(sys.executable)[0]
