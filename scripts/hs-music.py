@@ -6,10 +6,10 @@ Makes a temporary playlist of the music files in the directories in config.ini
 [hs-music] and opens it with the default media player
 '''
 
-import os, configparser, initialize
+import os
+import configparser
 
-Config = initialize.Config
-whiteSpace = initialize.whiteSpace
+from initialize import *
 
 # Gets the music directory from the config.ini [hs-music] section
 directories = []
@@ -21,11 +21,16 @@ for option in Config.options("hs-music"):
 def main():
 	execute()
 
-def checkExt(fileName):
-	# Takes a file name (string) as an arguement and checks if the file
-	# has valid extensions for a music file
+def isValidExt(fileName):
+	"""Takes a file name (string) as an arguement and checks if the file
+	has valid extensions for a music file"""
 	
-	extensions = [".mp3", ".m4a", ".ogg", ".flac"]
+	extensions = [
+		".mp3", 
+		".m4a", 
+		".ogg", 
+		".flac"
+		]
 
 	for extension in extensions:
 		if (fileName.endswith(extension) or fileName.endswith(extension.upper())):
@@ -34,8 +39,8 @@ def checkExt(fileName):
 	return False
 
 def getMusicFiles(directory):
-	# Returns a list of all the music files from a given directory and 
-	# it's sub-directories
+	"""Returns a list of all the music files from a given directory and 
+	it's sub-directories"""
 
 	musicFiles = []
 	files = os.listdir(directory)
@@ -46,7 +51,7 @@ def getMusicFiles(directory):
 		file = os.path.join(directory, file)
 		if (os.path.isdir(file)):
 			musicFiles.extend(getMusicFiles(file))
-		elif(checkExt(file)):
+		elif(isValidExt(file)):
 			musicFiles.append(file)
 
 	return musicFiles
@@ -81,7 +86,7 @@ def execute():
 		os.startfile(m3uFile)
 		# delete_playlist.py deletes the temporary playlist
 		os.system(
-			"START \"delete_playlist.py\" /MIN python \"bin\\delete_playlist.py\"")
+			"START \"delete_playlist.py\" /MIN python \"Scripts\\delete_playlist.py\"")
 
 	# If the directory is not specified in config.ini then ...
 	else:
