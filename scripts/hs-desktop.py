@@ -6,10 +6,10 @@ Manages your desktop by automatically placing different files to their
 respective directories in config.ini [hs-desktop]
 '''
 
-import os, random, initialize
+import os
+import random
 
-Config = initialize.Config
-whiteSpace = initialize.whiteSpace
+from initialize import *
 
 # Gets the path to Desktop
 desktop = os.path.join(os.environ['USERPROFILE'], "Desktop")
@@ -52,16 +52,13 @@ def main():
 
 def execute():
 	# If the path values are not set then this block wont execute
-	if (not("" in paths.values())):
-
-		# Lists the files on the desktop
+	if ("" not in paths.values()):
 		files = os.listdir(desktop)
 		
 		for file in files:
 			# Creates a full path to the file in desktop
 			filePath = os.path.join(desktop, file)
 
-			# If the file is not a directory then ...
 			if not(os.path.isdir(file)):
 				# Splits file path and file extension
 				fileName, fileExtension = os.path.splitext(filePath)
@@ -99,9 +96,19 @@ def execute():
 					# the file we're operating on
 					except (WindowsError):
 						fileName, fileExtension = os.path.splitext(newLocation)
-						oldLocation = newLocation
+						count = 1
 						# Randomly append an integer to the end of the file name
-						newLocation = fileName + str(random.randint(0,20)) + fileExtension
+						while (os.path.exists(newLocation)):
+							newLocation = (
+								fileName         + 
+								" ("             + 
+								str(count)       + 
+								")"              +
+								fileExtension
+								)
+
+							count += 1
+
 						# Moves the file to "newLocation"
 						os.rename(filePath, newLocation)
 						print("{0} Renamed {1} to {2} since {1} already exists in destination folder".format(
