@@ -2,7 +2,7 @@
 # Created: 10th April 2016
 
 '''
-Description: Opens all the URLs listed in config.ini [Browser] section
+Opens all the URLs listed in config.ini [hs-browse] section
 '''
 
 import webbrowser, initialize

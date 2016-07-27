@@ -2,8 +2,8 @@
 # Created: 10th April 2016
 
 '''
-Description: Opens all the project files in config.ini [hs-work] with 
-the text editor specified
+Opens all the project files in config.ini [hs-work] with  the text editor 
+specified in config.ini
 '''
 
 import os, initialize
@@ -18,7 +18,8 @@ whiteSpace = "    "
 files = []		# Files list
 editor = ""		# Text editor
 
-# Appends all file paths from the config.ini [hs-work] section to 'files' and the editor path to 'editor'
+# Appends all file paths from the config.ini [hs-work] section to 
+# 'files' and the editor path to 'editor'
 for option in Config.options("hs-work"):
 	value = Config.get("hs-work", option)
 

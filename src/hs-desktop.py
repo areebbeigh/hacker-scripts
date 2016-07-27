@@ -2,8 +2,8 @@
 # Created: 10th April 2016
 
 '''
-Description: Manages your desktop by automatically placing different
-files to their respective directories in config.ini [Manage_Dekstop]
+Manages your desktop by automatically placing different files to their 
+respective directories in config.ini [hs-desktop]
 '''
 
 import os, random, initialize
@@ -14,7 +14,8 @@ whiteSpace = initialize.whiteSpace
 # Gets the path to Desktop
 desktop = os.path.join(os.environ['USERPROFILE'], "Desktop")
 
-# Paths/Directories for different file types are loaded from the config.ini [hs-desktop] seciton
+# Paths/Directories for different file types are loaded from the 
+# config.ini [hs-desktop] seciton
 paths = { 
 	"images": Config.get("hs-desktop", "images_directory"),
 	"videos": Config.get("hs-desktop", "videos_directory"),
@@ -65,8 +66,9 @@ def execute():
 				# Splits file path and file extension
 				fileName, fileExtension = os.path.splitext(filePath)
 
-				# Further we check if the extension of the file is mentioned in a any of the extension
-				# lists above and then we put the file in the respective directory
+				# Further we check if the extension of the file is mentioned in 
+				# any of the extensions lists above and then we put the file in 
+				# the respective directory
 
 				# Check for images
 				if fileExtension.lower() in imageExtensions:
@@ -93,7 +95,8 @@ def execute():
 							whiteSpace, 
 							os.path.basename(filePath)))
 
-					# If the file already exists then we rename the file we're operating on
+					# If a file with the same name already exists then we rename 
+					# the file we're operating on
 					except (WindowsError):
 						fileName, fileExtension = os.path.splitext(newLocation)
 						oldLocation = newLocation

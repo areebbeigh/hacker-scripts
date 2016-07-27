@@ -2,8 +2,8 @@
 # Created: 23rd July 2016
 
 '''
-Description: This script creates a new windows scheduled task that executes a
-hacker-scripts COMMAND script at a time in the future specified by the user
+This script creates a new windows scheduled task that executes a hacker-scripts 
+COMMAND script at a time in the future specified by the user
 
 Command used: SCHTASKS
 '''
