@@ -3,7 +3,9 @@ This script is used in most of the hacker-script programs to do the initial stuf
 we don't have to repeat long lines of code in other scripts
 '''
 
-import os, sys, configparser
+import os
+import sys
+import configparser
 
 # Gets the root directory (Drive letter in case of windows)
 rootDirectory = os.path.splitdrive(sys.executable)[0]

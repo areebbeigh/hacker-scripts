@@ -8,27 +8,23 @@ overwriting is canceled it simply opens the config file in the default
 application
 '''
 
-import os, configparser, sys
+import os
+import configparser
+import sys
 
-# Gets the root directory (Drive letter in case of windows)
-rootDirectory = os.path.splitdrive(sys.executable)[0]
-
-# Changes the current working directory
-os.chdir(os.path.join(rootDirectory, "\\hacker-scripts"))
-
-Config = configparser.ConfigParser()
+from Scripts.initialize import *
 
 currentDirectory = os.getcwd()
 configFile = "config.ini"
 filePath = os.path.join(currentDirectory, configFile)
 
-# Default path to sublime text editor 3 on windows
+# Default path to sublime text editor 3 on Windows
 editorPath = os.path.join(
-	rootDirectory, "\\Program Files\\Sublime Text 3\\sublime_text.exe")
+	rootDirectory, 
+	"\\Program Files\\Sublime Text 3\\sublime_text.exe")
 
 def createFile():
-			"""
-			Function to create a new configuration file
+			"""Function to create a new configuration file
 			"""
 
 			with open("config.ini", "w") as configFile:
@@ -37,7 +33,7 @@ def createFile():
 					"# You can add as many parameters as you want to CERTAIN " +
 					"sections but they must be in series\n")
 				
-				# Add settings and parameters the the config file
+				# Add sections and parameters the the config file
 				Config.add_section("hs-browse")
 				Config.set("hs-browse", "url1", "")
 				Config.set("hs-browse", "url2", "")
@@ -80,15 +76,12 @@ def createFile():
 			sys.exit(0)
 
 def main():
-	# Checks the a config file already exists
 	if (os.path.isfile(filePath)):
-
 		print("The file config.ini already exists, do you want to continue and " +
 			"over-write the file with new settings? (y/N)")
 
 		action = input().upper()
 
-		# Rewrites a fresh config file
 		if (action == "Y" or action == "YES"):
 			createFile()
 		else:
