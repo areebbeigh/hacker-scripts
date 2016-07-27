@@ -5,9 +5,10 @@
 Opens all the URLs listed in config.ini [hs-browse] section
 '''
 
-import webbrowser 
+import webbrowser, initialize
 
-from initialize import *
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # List of URLs to open (will be filled later)
 urls = []
