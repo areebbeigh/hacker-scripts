@@ -12,11 +12,10 @@ import os
 import configparser
 import sys
 
-from Scripts.initialize import *
+from src.initialize import *
 
 currentDirectory = os.getcwd()
-configFile = "config.ini"
-filePath = os.path.join(currentDirectory, configFile)
+configFile = os.path.join(currentDirectory, "config.ini")
 
 # Default path to sublime text editor 3 on Windows
 editorPath = os.path.join(
@@ -24,16 +23,22 @@ editorPath = os.path.join(
 	"\\Program Files\\Sublime Text 3\\sublime_text.exe")
 
 def createFile():
-			"""Function to create a new configuration file
+			"""Creates a new configuration file with default values
 			"""
 
-			with open("config.ini", "w") as configFile:
+			with open(configFile, "w+") as f:
 
-				configFile.write(
-					"# You can add as many parameters as you want to CERTAIN " +
-					"sections but they must be in series\n")
+				f.write("; hacker-scripts configuration file\n")
 				
 				# Add sections and parameters the the config file
+				Config.add_section("hs-backup")
+				Config.set("hs-backup", "purge", "")
+				Config.set("hs-backup", "retries", "")
+				Config.set("hs-backup", "backup_location", "")
+				Config.set("hs-backup", "directory1", "")
+				Config.set("hs-backup", "directory2", "")
+				Config.set("hs-backup", "directory3", "")
+
 				Config.add_section("hs-browse")
 				Config.set("hs-browse", "url1", "")
 				Config.set("hs-browse", "url2", "")
@@ -66,9 +71,9 @@ def createFile():
 				Config.set("hs-work", "project2", "")
 				Config.set("hs-work", "project3", "")
 				
-				Config.write(configFile)
+				Config.write(f)
 
-			print("Config file has been created at " + filePath)
+			print("Config file has been created at " + configFile)
 			print("You can go ahead and configure the file.")
 			
 			os.startfile("C:\\hacker-scripts\\config.ini")
@@ -76,7 +81,7 @@ def createFile():
 			sys.exit(0)
 
 def main():
-	if (os.path.isfile(filePath)):
+	if (os.path.isfile(configFile)):
 		print("The file config.ini already exists, do you want to continue and " +
 			"over-write the file with new settings? (y/N)")
 
@@ -85,7 +90,7 @@ def main():
 		if (action == "Y" or action == "YES"):
 			createFile()
 		else:
-			os.startfile(filePath)
+			os.startfile(configFile)
 			sys.exit(0)
 	else:
 		createFile()

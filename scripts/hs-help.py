@@ -17,6 +17,7 @@ def main():
     ---------
     Currently available commands:
 
+	> hs-backup         Creates a backup of all the files in the backup location, both are specified in the config
     > hs-browse         Opens the URLs in the configuration file
     > hs-config         Creates (or overwrites) a config.ini file in <root directory>\\hacker-scripts
     > hs-desktop        Manages your desktop files by placing different file types to their respective directories
