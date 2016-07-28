@@ -11,7 +11,7 @@ Command used: SCHTASKS
 import os
 import time
 
-from initialize import *
+from src.initialize import *
 
 def main():
 	execute()
@@ -59,7 +59,7 @@ def execute():
 			cmdName = script.partition(".")[0]
 			commands.append(cmdName)
 	
-	givenCmd = input("\n{}Command Name: ".format(whiteSpace))
+	givenCmd = input("\n{}Command Name: ".format(whiteSpace)).rstrip()
 	execTime = ""
 
 	if(givenCmd in commands):

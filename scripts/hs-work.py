@@ -8,7 +8,7 @@ specified in config.ini
 
 import os
 
-from initialize import *
+from src.initialize import *
 
 # Reads/Loads the config.ini configuration file
 Config.read("config.ini")
@@ -42,7 +42,7 @@ def execute(files=files):
 	
 	# If no files are specified in config.ini
 	else:
-		print("{0} No directory(ies) / file(s) specified in the config file".format(whiteSpace))
+		raise ConfigError("No files specified in the configuration file")
 
 if __name__ == "__main__":
 	main()

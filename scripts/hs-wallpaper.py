@@ -10,7 +10,7 @@ import ctypes
 import os
 import random
 
-from initialize import *
+from src.initialize import *
 
 # Gets the directory containing the wallpapers from the config.ini 
 # [hs-wallpaper] seciton
@@ -40,7 +40,6 @@ def getWallpapers(givenDir):
 	return wallpapers
 
 def execute():
-	# If the wallpaper directory is specified in config.ini then ...
 	if (wallpaperDirectory):
 		wallpapers = getWallpapers(wallpaperDirectory)
 
@@ -58,10 +57,8 @@ def execute():
 			0, 
 			randomWallpaper, 
 			0)
-
-	# If the wallpaper directory is not specified in config.ini then ...
 	else:
-		print("{0} No directory specified in the config file".format(whiteSpace))
+		raise ConfigError("No wallpaper directory specified in the configuration file")
 
 if __name__ == "__main__":
 	main()

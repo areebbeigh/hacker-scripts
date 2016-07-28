@@ -7,7 +7,7 @@ Opens all the URLs listed in config.ini [hs-browse] section
 
 import webbrowser 
 
-from initialize import *
+from src.initialize import *
 
 # List of URLs to open (will be filled later)
 urls = []

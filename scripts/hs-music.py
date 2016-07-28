@@ -9,7 +9,7 @@ Makes a temporary playlist of the music files in the directories in config.ini
 import os
 import configparser
 
-from initialize import *
+from src.initialize import *
 
 # Gets the music directory from the config.ini [hs-music] section
 directories = []
@@ -90,7 +90,7 @@ def execute():
 
 	# If the directory is not specified in config.ini then ...
 	else:
-		print("{0} Directory not specified in the config file".format(whiteSpace))
+		raise ConfigError("Music directories are not specified in the configuration file")
 
 if __name__ == "__main__":
 	main()

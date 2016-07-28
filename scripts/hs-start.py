@@ -7,7 +7,7 @@ Starts all the programs in config.ini [hs-start]
 
 import os
 
-from initialize import *
+from src.initialize import *
 
 # List of programs/files to be opened (will be filled later)
 files = []
@@ -33,8 +33,7 @@ def execute():
 				print("{0} Skipping {1} since it does not exist".format(
 					whiteSpace, file))
 	else:
-		print("{0} No programs/files specified in the config file".format(
-			whiteSpace))
+		raise ConfigError("No programs / files specified in the configuration file")
 
 if __name__ == "__main__":
 	main()
