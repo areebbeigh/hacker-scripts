@@ -1,0 +1,64 @@
+DESCRIPTION
+-----------
+
+hs-backup
+
+This command will automatically create a backup of the
+directories that you add in the configuration. The backup location
+is also set in the configuration itself. The script uses the windows
+'ROBOCOPY' command to backup the files more efficiently and quickly.
+
+Each time a backup is complete the log is appended to the backup log
+file which can be found in the hacker-scripts directory itself.
+
+The log is automatically cleared after the size exceeds 1 MB.
+
+CONFIGURATION
+-------------
+
+Here's an example configuration:
+
+[hs-backup]
+	purge = 0
+	retries = 10
+	backup_location = D:\
+	directory1 = C:\Users\Areeb\Documents\GitHub
+	directory2 = C:\Users\Areeb\Desktop\Python
+	directory3 = C:\Users\Areeb\Desktop\Files
+
+1. PURGE
+
+PURGE may have 2 values, either 0 (i.e off) or 1 (i.e on)
+
+If PURGE is on then the files that do not exist in the source anymore
+will be deleted from the backup location. If you prefer to keep deleted files
+on your backup then set it to 0.
+
+2. RETRIES
+
+This is the number of times ROBOCOPY should retry the backup if it fails.
+In ROBOCOPY by default this value is 1 million (1000000), you probably would
+want a lower value on a personal computer.
+
+3. BACKUP_LOCATION
+
+This is where all your files will be backed up to. Usually this would be another
+drive.
+
+4. DIRECTORIES
+
+These are the directories that you want to create a backup of, each time the command 
+is run.
+
+USAGE
+-----
+
+hs-backup [-h]
+
+Required aruements:
+
+None
+
+Optional arguements:
+
+--h, -h		Display this help documentation
