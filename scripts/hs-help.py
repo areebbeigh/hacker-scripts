@@ -6,18 +6,18 @@ Prints a brief help documentation to the terminal
 '''
 
 def main():
-    print("""
+	print("""
     Python hacker-scripts by Areeb - github.com/areeb-beigh/hacker-scripts (Feel free to contribute)
 
     This is a collection of mini-scripts written in Python intended to make
     frequently used or random tasks such as playing music, launching programs you use
-    frequently, opening the pages you browse daily etc just with a single command through your 
-    terminal command or by running a script.
+    frequently, opening the pages you browse daily etc easier just with a single command 
+    through your terminal.
 
     ---------
     Currently available commands:
 
-	> hs-backup         Creates a backup of all the files in the backup location, both are specified in the config
+    > hs-backup         Creates a backup of all the files in the backup location, both are specified in the config
     > hs-browse         Opens the URLs in the configuration file
     > hs-config         Creates (or overwrites) a config.ini file in <root directory>\\hacker-scripts
     > hs-desktop        Manages your desktop files by placing different file types to their respective directories
@@ -30,6 +30,11 @@ def main():
 
     Most the above scripts depend on the config.ini file located in <root directory>\hacker-scripts. You can edit the 
     file anytime and the scripts will automatically run according to the new configuration.
+    
+    To view individual help documentation of any command use the following syntax:
+    "<command name> -h"
+
+    Ex: "hs-music -h" will display hs-music's help documentation.
     """)
 
 if __name__ == "__main__":
