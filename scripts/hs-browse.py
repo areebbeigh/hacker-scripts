@@ -5,9 +5,16 @@
 Opens all the URLs listed in config.ini [hs-browse] section
 '''
 
+import sys
 import webbrowser 
+import argparse
+from src import help
+from src import initialize
 
-from src.initialize import *
+initialize.initialize()
+
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # List of URLs to open (will be filled later)
 urls = []
@@ -18,6 +25,18 @@ for option in Config.options("hs-browse"):
 		urls.append(Config.get("hs-browse", option))
 
 def main():
+	parser = argparse.ArgumentParser(add_help=False)
+	parser.add_argument('--help', 
+						'-help', 
+						action='store_true')
+
+	args = parser.parse_args()
+
+	if(args.help):
+		cmd = sys.argv[0].partition(".")[0]
+		help.displayHelp(cmd)
+		return
+
 	execute()
 
 def execute():

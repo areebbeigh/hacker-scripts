@@ -7,12 +7,16 @@ specified in config.ini
 '''
 
 import os
+import sys
+import argparse
+from src.errors import *
+from src import help
+from src import initialize
 
-from src.initialize import *
+initialize.initialize()
 
-# Reads/Loads the config.ini configuration file
-Config.read("config.ini")
-whiteSpace = "    "
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 files = []		# Files list
 editor = ""		# Text editor
@@ -31,6 +35,18 @@ for option in Config.options("hs-work"):
 		editor += value
 
 def main():
+	parser = argparse.ArgumentParser(add_help=False)
+	parser.add_argument('--help', 
+						'-help', 
+						action='store_true')
+
+	args = parser.parse_args()
+
+	if(args.help):
+		cmd = sys.argv[0].partition(".")[0]
+		help.displayHelp(cmd)
+		return
+
 	execute()
 
 def execute(files=files):

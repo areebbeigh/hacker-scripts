@@ -9,10 +9,16 @@ application
 '''
 
 import os
-import configparser
 import sys
+import configparser
+import argparse
+from src import help
+from src import initialize
 
-from src.initialize import *
+initialize.initialize()
+
+rootDirectory = initialize.rootDirectory
+Config = initialize.Config
 
 currentDirectory = os.getcwd()
 configFile = os.path.join(currentDirectory, "config.ini")
@@ -26,7 +32,7 @@ def createFile():
 			"""Creates a new configuration file with default values
 			"""
 
-			with open(configFile, "w+") as f:
+			with open(configFile, "w") as f:
 
 				f.write("; hacker-scripts configuration file\n")
 				
@@ -44,15 +50,15 @@ def createFile():
 				Config.set("hs-browse", "url2", "")
 				Config.set("hs-browse", "url3", "")
 
-				Config.add_section("hs-music")
-				Config.set("hs-music", "directory1", "")
-				Config.set("hs-music", "directory2", "")
-				Config.set("hs-music", "directory3", "")
-
 				Config.add_section("hs-desktop")
 				Config.set("hs-desktop", "files_directory", "")
 				Config.set("hs-desktop", "images_directory", "")
 				Config.set("hs-desktop", "videos_directory", "")
+
+				Config.add_section("hs-music")
+				Config.set("hs-music", "directory1", "")
+				Config.set("hs-music", "directory2", "")
+				Config.set("hs-music", "directory3", "")
 
 				Config.add_section("hs-start")
 				Config.set("hs-start", "program1", "")
@@ -81,6 +87,18 @@ def createFile():
 			sys.exit(0)
 
 def main():
+	parser = argparse.ArgumentParser(add_help=False)
+	parser.add_argument('--help', 
+						'-help', 
+						action='store_true')
+
+	args = parser.parse_args()
+
+	if(args.help):
+		cmd = sys.argv[0].partition(".")[0]
+		help.displayHelp(cmd)
+		return
+
 	if (os.path.isfile(configFile)):
 		print("The file config.ini already exists, do you want to continue and " +
 			"over-write the file with new settings? (y/N)")
@@ -90,7 +108,7 @@ def main():
 		if (action == "Y" or action == "YES"):
 			createFile()
 		else:
-			os.startfile(configFile)
+			os.startfile(configFile, 'edit')	# Opens the file for editing
 			sys.exit(0)
 	else:
 		createFile()

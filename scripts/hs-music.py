@@ -7,9 +7,17 @@ Makes a temporary playlist of the music files in the directories in config.ini
 '''
 
 import os
+import sys
 import configparser
+import argparse
+from src.errors import *
+from src import help
+from src import initialize
 
-from src.initialize import *
+initialize.initialize()
+
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # Gets the music directory from the config.ini [hs-music] section
 directories = []
@@ -19,6 +27,18 @@ for option in Config.options("hs-music"):
 		directories.append(Config.get("hs-music", option))
 
 def main():
+	parser = argparse.ArgumentParser(add_help=False)
+	parser.add_argument('--help', 
+						'-help', 
+						action='store_true')
+
+	args = parser.parse_args()
+
+	if(args.help):
+		cmd = sys.argv[0].partition(".")[0]
+		help.displayHelp(cmd)
+		return
+
 	execute()
 
 def isValidExt(fileName):

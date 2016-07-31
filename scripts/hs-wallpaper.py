@@ -6,17 +6,37 @@ Chooses a random image file from the directory specified in the config.ini
 [hs-wallpaper] section and sets it as the desktop background 
 '''
 
-import ctypes
 import os
+import sys
 import random
+import argparse
+import ctypes
+from src.errors import *
+from src import help
+from src import initialize
 
-from src.initialize import *
+initialize.initialize()
+
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # Gets the directory containing the wallpapers from the config.ini 
 # [hs-wallpaper] seciton
 wallpaperDirectory = Config.get("hs-wallpaper", "directory")
 
 def main():
+	parser = argparse.ArgumentParser(add_help=False)
+	parser.add_argument('--help', 
+						'-help', 
+						action='store_true')
+
+	args = parser.parse_args()
+
+	if(args.help):
+		cmd = sys.argv[0].partition(".")[0]
+		help.displayHelp(cmd)
+		return
+
 	execute()
 
 def getWallpapers(givenDir):

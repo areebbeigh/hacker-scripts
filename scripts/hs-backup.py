@@ -7,9 +7,30 @@ the files and the backup location are specified in the configuration
 '''
 
 import os
-from src.initialize import *
+import sys
+import argparse
+from src.errors import *
+from src import help
+from src import initialize
+
+initialize.initialize()
+
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 def main():
+	parser = argparse.ArgumentParser(add_help=False)
+	parser.add_argument('--help', 
+						'-help', 
+						action='store_true')
+
+	args = parser.parse_args()
+
+	if(args.help):
+		cmd = sys.argv[0].partition(".")[0]
+		help.displayHelp(cmd)
+		return
+
 	execute()
 
 def isValidConfig(purge, retries, backupLocation, files):
@@ -31,7 +52,7 @@ def isValidConfig(purge, retries, backupLocation, files):
 		raise ConfigError("Value of retries must be an integer greater than 0")
 
 	if(not os.path.isdir(backupLocation)):
-		raise ConfigError("Value of backup_location must be a valid directory (available)")
+		raise ConfigError("Value of backup_location must be a valid directory)")
 
 	for file in files:
 		if(not os.path.isdir(file)):

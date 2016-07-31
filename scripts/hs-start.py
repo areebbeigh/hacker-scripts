@@ -6,8 +6,16 @@ Starts all the programs in config.ini [hs-start]
 '''
 
 import os
+import sys
+import argparse
+from src.errors import *
+from src import help
+from src import initialize
 
-from src.initialize import *
+initialize.initialize()
+
+Config = initialize.Config
+whiteSpace = initialize.whiteSpace
 
 # List of programs/files to be opened (will be filled later)
 files = []
@@ -19,6 +27,18 @@ for option in Config.options("hs-start"):
 		files.append(Config.get("hs-start", option))
 
 def main():
+	parser = argparse.ArgumentParser(add_help=False)
+	parser.add_argument('--help', 
+						'-help', 
+						action='store_true')
+
+	args = parser.parse_args()
+
+	if(args.help):
+		cmd = sys.argv[0].partition(".")[0]
+		help.displayHelp(cmd)
+		return
+
 	execute()
 
 def execute():
