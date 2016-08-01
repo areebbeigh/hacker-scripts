@@ -1,0 +1,35 @@
+DESCRIPTION
+-----------
+
+hs-browse
+
+This command will simply open all the URLs that are specified in 
+the configuration with the default web browser.
+
+CONFIGURATION
+-------------
+
+Here's an example configuration:
+
+[hs-browse]
+	url1 = www.github.com
+	url2 = www.stackoverflow.com
+	url3 = www.facebook.com
+	url4 = mail.google.com
+
+1. URLs
+
+The URLs.
+
+USAGE
+-----
+
+hs-browse [-h]
+
+Required arguments:
+
+None
+
+Optional arguments:
+
+--h, -h		Display this help documentation

@@ -1,0 +1,32 @@
+DESCRIPTION
+-----------
+
+hs-wallpaper
+
+This command scans the given wallpaper directory (including sub-directories) for 
+it's images and sets a random image from them as your desktop wallpaper.
+
+CONFIGURATION
+-------------
+
+Here's an example configuration:
+
+[hs-wallpaper]
+	directory = C:\Users\Areeb\Desktop\Wallpapers
+
+1. DIRECTORY
+
+The directory that contains your wallpapers.
+
+USAGE
+-----
+
+hs-wallpaper [-h]
+
+Required arguments:
+
+None
+
+Optional arguments:
+
+--h, -h		Display this help documentation
