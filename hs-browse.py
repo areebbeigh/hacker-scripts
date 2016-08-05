@@ -14,12 +14,12 @@ from src.initialize import Initialize
 from src.configreader import ConfigReader
 
 initializer = Initialize()
-whiteSpace = initializer.whiteSpace
-configFile = initializer.configFile
-configReader = ConfigReader(configFile)
+white_space = initializer.white_space
+config_file = initializer.config_file
+config_reader = ConfigReader(config_file)
 
 # List of URLs to open (will be filled later)
-urls = configReader.readConfig("hs-browse")
+urls = config_reader.read_config("hs-browse")
 
 
 def main():
@@ -31,7 +31,7 @@ def main():
 
     if args.help:
         cmd = sys.argv[0].partition(".")[0]
-        help.displayHelp(cmd)
+        help.display_help(cmd)
         return
 
     execute()
@@ -39,7 +39,7 @@ def main():
 
 def execute():
     for url in urls:
-        print("{0} Opening {1}".format(whiteSpace, url))
+        print("{0} Opening {1}".format(white_space, url))
         # Opens the URL with the default browser
         webbrowser.open(url)
 

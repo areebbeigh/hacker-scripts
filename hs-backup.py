@@ -16,9 +16,9 @@ from src.initialize import Initialize
 from src.configreader import ConfigReader
 
 initializer = Initialize()
-whiteSpace = initializer.whiteSpace
-configFile = initializer.configFile
-configReader = ConfigReader(configFile)
+white_space = initializer.white_space
+config_file = initializer.config_file
+config_reader = ConfigReader(config_file)
 
 
 def main():
@@ -31,13 +31,13 @@ def main():
 
     if args.help:
         cmd = sys.argv[0].partition(".")[0]
-        help.displayHelp(cmd)
+        help.display_help(cmd)
         return
 
     execute()
 
 
-def isValidConfig(purge, retries, backupLocation, files):
+def is_valid_config(purge, retries, backup_location, files):
     """ Takes all options in the "hs-backup" section as parameters and returns
     True if they are valid, else raises a ConfigError """
 
@@ -55,7 +55,7 @@ def isValidConfig(purge, retries, backupLocation, files):
     except ValueError:
         raise ConfigError("Value of retries must be an integer greater than 0")
 
-    if not os.path.isdir(backupLocation):
+    if not os.path.isdir(backup_location):
         raise ConfigError("Value of backup_location must be a valid directory)")
 
     for file in files:
@@ -66,38 +66,38 @@ def isValidConfig(purge, retries, backupLocation, files):
 
 
 def execute():
-    purge, retries, backupLocation, directories = configReader.readConfig("hs-backup")
-    logFile = "backup_log.txt"
-    maxLogSize = 1 * 1024 * 1024  # Default 1 MB
+    purge, retries, backup_location, directories = config_reader.read_config("hs-backup")
+    log_file = "backup_log.txt"
+    max_log_size = 1 * 1024 * 1024  # Default 1 MB
 
-    if isValidConfig(purge, retries, backupLocation, directories):
+    if is_valid_config(purge, retries, backup_location, directories):
         purge = int(purge)
         retries = int(retries)
 
         for file in directories:
-            backup = os.path.join(backupLocation, os.path.basename(file))
+            backup = os.path.join(backup_location, os.path.basename(file))
             if not os.path.exists(backup):
                 os.makedirs(backup)
 
             src = file
             dst = backup
-            print(whiteSpace + file, backup, sep=" -> ")
-            # Removes the log file if it gets larger than maxLogSize (default 1 MB)
+            print(white_space + file, backup, sep=" -> ")
+            # Removes the log file if it gets larger than max_log_size (default 1 MB)
             try:
-                if os.path.getsize(logFile) > maxLogSize:
-                    os.remove(logFile)
+                if os.path.getsize(log_file) > max_log_size:
+                    os.remove(log_file)
             except FileNotFoundError:
                 pass
 
             if purge == 0:
                 command = "ROBOCOPY /LOG+:\"{0}\" /V /E /R:{1} {2} {3}".format(
-                    logFile,
+                    log_file,
                     retries,
                     src,
                     dst)
             elif purge == 1:
                 command = "ROBOCOPY /LOG+:\"{0}\" /V /E /PURGE /R:{1} {2} {3}".format(
-                    logFile,
+                    log_file,
                     retries,
                     src,
                     dst)

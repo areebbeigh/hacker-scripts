@@ -16,22 +16,22 @@ from src.initialize import Initialize
 from src.configreader import ConfigReader
 
 initializer = Initialize()
-whiteSpace = initializer.whiteSpace
-configFile = initializer.configFile
-configReader = ConfigReader(configFile)
+white_space = initializer.white_space
+config_file = initializer.config_file
+config_reader = ConfigReader(config_file)
 # Gets the path to Desktop
 desktop = os.path.join(os.environ['USERPROFILE'], "Desktop")
 
 # Paths/Directories for different file types
-paths = configReader.readConfig("hs-desktop")
+paths = config_reader.read_config("hs-desktop")
 
 # Different extension types for different file types
-imageExtensions = [
+image_extns = [
     ".png",
     ".jpg",
     ".gif",
 ]
-videoExtensions = [
+video_extns = [
     ".avi",
     ".mp4",
     ".mkv",
@@ -43,7 +43,7 @@ videoExtensions = [
     ".3g2",
     ".f4v"
 ]
-textFileExtensions = [
+text_file_extns = [
     ".txt",
     ".ppt",
     ".doc",
@@ -61,7 +61,7 @@ def main():
 
     if args.help:
         cmd = sys.argv[0].partition(".")[0]
-        help.displayHelp(cmd)
+        help.display_help(cmd)
         return
 
     execute()
@@ -73,59 +73,59 @@ def execute():
 
         for file in files:
             # Creates a full path to the file in desktop
-            filePath = os.path.join(desktop, file)
+            file_page = os.path.join(desktop, file)
 
             if not os.path.isdir(file):
                 # Splits file path and file extension
-                fileName, fileExtension = os.path.splitext(filePath)
+                file_name, file_extn = os.path.splitext(file_page)
 
                 # Further we check if the extension of the file is mentioned in
                 # any of the extension lists above and then we put the file in
                 # the directory (from dict 'paths') matching the file type
 
                 # Check for images
-                if fileExtension.lower() in imageExtensions:
-                    newLocation = os.path.join(paths["images"], file)
+                if file_extn.lower() in image_extns:
+                    new_location = os.path.join(paths["images"], file)
                 # Check for videos
-                elif fileExtension.lower() in videoExtensions:
-                    newLocation = os.path.join(paths["videos"], file)
+                elif file_extn.lower() in video_extns:
+                    new_location = os.path.join(paths["videos"], file)
                 # Check for text files
-                elif fileExtension.lower() in textFileExtensions:
-                    newLocation = os.path.join(paths["textFiles"], file)
+                elif file_extn.lower() in text_file_extns:
+                    new_location = os.path.join(paths["textFiles"], file)
                 # If the file type is unknown to the program then we skip it
                 else:
-                    newLocation = None
+                    new_location = None
 
                 # If the file type is not unknown then ...
-                if newLocation:
+                if new_location:
                     try:
-                        # This moves the file to "newLocation"
-                        os.rename(filePath, newLocation)
+                        # This moves the file to "new_location"
+                        os.rename(file_page, new_location)
                         print("{0} Moved {1}".format(
-                            whiteSpace,
-                            os.path.basename(filePath)))
+                            white_space,
+                            os.path.basename(file_page)))
                     # If a file with the same name already exists then we rename
                     # the file we're operating on
                     except WindowsError:
-                        fileName, fileExtension = os.path.splitext(newLocation)
+                        file_name, file_extn = os.path.splitext(new_location)
                         count = 1
                         # Randomly append an integer to the end of the file name
-                        while os.path.exists(newLocation):
-                            newLocation = (
-                                fileName +
+                        while os.path.exists(new_location):
+                            new_location = (
+                                file_name +
                                 " (" +
                                 str(count) +
                                 ")" +
-                                fileExtension
+                                file_extn
                             )
                             count += 1
 
-                        # Moves the file to "newLocation"
-                        os.rename(filePath, newLocation)
+                        # Moves the file to "new_location"
+                        os.rename(file_page, new_location)
                         print("{0} Renamed {1} to {2} since {1} already exists in destination folder".format(
-                            whiteSpace,
+                            white_space,
                             os.path.basename(file),
-                            os.path.basename(newLocation)))
+                            os.path.basename(new_location)))
     else:
         raise ConfigError("All paths are not specified in the configuration file")
 

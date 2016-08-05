@@ -16,11 +16,11 @@ from src.initialize import Initialize
 from src.configreader import ConfigReader
 
 initializer = Initialize()
-whiteSpace = initializer.whiteSpace
-configFile = initializer.configFile
-configReader = ConfigReader(configFile)
+white_space = initializer.white_space
+config_file = initializer.config_file
+config_reader = ConfigReader(config_file)
 # List of files and the text editor to open them with
-files, editor = configReader.readConfig("hs-work")
+files, editor = config_reader.read_config("hs-work")
 
 if not editor:
     raise ConfigError("No editor specified for the files")
@@ -36,7 +36,7 @@ def main():
 
     if args.help:
         cmd = sys.argv[0].partition(".")[0]
-        help.displayHelp(cmd)
+        help.display_help(cmd)
         return
 
     execute()
@@ -45,7 +45,7 @@ def main():
 def execute():
     if len(files) > 0:
         for file in files:
-            print("{0} Opening {1}".format(whiteSpace, file))
+            print("{0} Opening {1}".format(white_space, file))
             os.system('START "" "{0}" "{1}"'.format(editor, file))
 
     # If no files are specified in config.ini

@@ -1,7 +1,7 @@
-"""
-Author: Areeb Beigh
-Created: 5th August 2016
+# Author: Areeb Beigh
+# Created: 5th August 2016
 
+"""
 Module to read the configuration of different hacker-scripts from the
 given configuration file and return the results
 """
@@ -9,23 +9,23 @@ given configuration file and return the results
 import configparser
 import os
 
-from src.filetools import getAllFiles
+from src.filetools import get_all_files
 
 
 class ConfigReader:
     readMethods = {
-        "hs-backup":     "_readBackup",
-        "hs-browse":     "_readBrowse",
-        "hs-desktop":    "_readDesktop",
-        "hs-music":      "_readMusic",
-        "hs-start":      "_readStart",
-        "hs-wallpaper":  "_readWallpaper",
-        "hs-work":       "_readWork",
+        "hs-backup":     "_read_backup",
+        "hs-browse":     "_read_browse",
+        "hs-desktop":    "_read_desktop",
+        "hs-music":      "_read_music",
+        "hs-start":      "_read_start",
+        "hs-wallpaper":  "_read_wallpaper",
+        "hs-work":       "_read_work",
     }
 
     def __init__(self, configFile):
-        """ Creates a ConfigParser object and reads the given configuration
-        file
+        """
+        Creates a ConfigParser object and reads the given configuration file
 
         Parameters:
             configFile:
@@ -35,8 +35,9 @@ class ConfigReader:
         self.Config = configparser.ConfigParser()
         self.Config.read(configFile)
 
-    def readConfig(self, script):
-        """ Calls the appropriate read method to read the configuration
+    def read_config(self, script):
+        """
+        Calls the appropriate read method to read the configuration
         of the given script, returns None if no method is available
 
         Parameters:
@@ -51,9 +52,11 @@ class ConfigReader:
 
         return eval("self." + self.readMethods[script])(self.Config)
 
-    def _readBackup(self, Config):
-        """ Reads hs-backup configuration and returns a tuple of
-        configuration values """
+    def _read_backup(self, Config):
+        """
+        Reads hs-backup configuration and returns a tuple of
+        configuration values
+        """
 
         purge = Config.get("hs-backup", "purge")
         retries = Config.get("hs-backup", "retries")
@@ -67,9 +70,11 @@ class ConfigReader:
 
         return purge, retries, backupLocation, directories
 
-    def _readBrowse(self, Config):
-        """ Reads hs-browse configuration and returns a list of
-        urls """
+    def _read_browse(self, Config):
+        """
+        Reads hs-browse configuration and returns a list of
+        urls
+        """
 
         urls = []
 
@@ -80,9 +85,11 @@ class ConfigReader:
 
         return urls
 
-    def _readDesktop(self, Config):
-        """ Reads hs-desktop configuration and returns a dict
-        of the configuration values """
+    def _read_desktop(self, Config):
+        """
+        Reads hs-desktop configuration and returns a dict
+        of the configuration values
+        """
 
         paths = {
             "images": Config.get("hs-desktop", "images_directory"),
@@ -92,9 +99,11 @@ class ConfigReader:
 
         return paths
 
-    def _readMusic(self, Config):
-        """ Reads hs-music configuration and returns a list of
-        directories in it """
+    def _read_music(self, Config):
+        """
+        Reads hs-music configuration and returns a list of
+        directories in it
+        """
 
         extensions = [
             ".mp3",
@@ -107,14 +116,16 @@ class ConfigReader:
         for option in Config.options("hs-music"):
             directory = Config.get("hs-music", option)
             if os.path.isdir(directory):
-                musicFiles.extend(getAllFiles(directory, extensions))
+                musicFiles.extend(get_all_files(directory, extensions))
 
         return musicFiles
 
 
-    def _readStart(self, Config):
-        """ Reads hs-start configuration and returns a list of programs/files
-        in it """
+    def _read_start(self, Config):
+        """
+        Reads hs-start configuration and returns a list of programs/files
+        in it
+        """
 
         files = []
 
@@ -124,9 +135,11 @@ class ConfigReader:
 
         return files
 
-    def _readWallpaper(self, Config):
-        """ Reads hs-wallpaper configuration and returns a list of directories
-        in it """
+    def _read_wallpaper(self, Config):
+        """
+        Reads hs-wallpaper configuration and returns a list of directories
+        in it
+        """
 
         extensions = [".png", ".jpg"]
         wallpapers = []
@@ -134,13 +147,15 @@ class ConfigReader:
         for option in Config.options("hs-wallpaper"):
             directory = Config.get("hs-wallpaper", option)
             if os.path.isdir(directory):
-                wallpapers.extend(getAllFiles(directory, extensions))
+                wallpapers.extend(get_all_files(directory, extensions))
 
         return wallpapers
 
-    def _readWork(self, Config):
-        """ Reads the hs-work configuration and returns a list of files and
-        the text editor to open them with """
+    def _read_work(self, Config):
+        """
+        Reads the hs-work configuration and returns a list of files and
+        the text editor to open them with
+        """
 
         files = []
         editor = ""

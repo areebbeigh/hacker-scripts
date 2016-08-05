@@ -16,13 +16,13 @@ from src.initialize import Initialize
 from src.configreader import ConfigReader
 
 initializer = Initialize()
-whiteSpace = initializer.whiteSpace
-configFile = initializer.configFile
-configReader = ConfigReader(configFile)
+white_space = initializer.white_space
+config_file = initializer.config_file
+config_reader = ConfigReader(config_file)
 
 # Gets a list of all the music files in the directories and
 # their sub-directories in the configuration file
-musicFiles = configReader.readConfig("hs-music")
+music_files = config_reader.read_config("hs-music")
 
 
 def main():
@@ -35,22 +35,22 @@ def main():
 
     if args.help:
         cmd = sys.argv[0].partition(".")[0]
-        help.displayHelp(cmd)
+        help.display_help(cmd)
         return
 
     execute()
 
 
 def execute():
-    if musicFiles:
+    if music_files:
         # Playlist path
         playlist = os.path.join(initializer.BASE_DIRECTORY, 'playlist.m3u')
 
         with open(playlist, 'w') as f:
-            for file in musicFiles:
+            for file in music_files:
                 f.write(file + '\n')
 
-        print("{0} Playing {1} music files".format(whiteSpace, len(musicFiles)))
+        print("{0} Playing {1} music files".format(white_space, len(music_files)))
 
         os.startfile(playlist)
 

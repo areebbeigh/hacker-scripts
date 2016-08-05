@@ -24,16 +24,18 @@ cmdDocs = {
 }
 
 
-def displayHelp(cmdName):
-    """ Displays help document for given cmd name using the "more"
+def display_help(cmd_name):
+    """
+    Displays help document for given cmd name using the "more"
     windows command, if no doc is available then prints a no help
-    available message """
+    available message
+    """
 
-    cmdName = os.path.basename(cmdName)
-    doc = os.path.join(docsDir, cmdDocs[cmdName])
+    cmd_name = os.path.basename(cmd_name)
+    doc = os.path.join(docsDir, cmdDocs[cmd_name])
 
     if os.path.exists(doc):
         os.system("more \"{}\"".format(header))
         os.system("more \"{}\"".format(doc))
     else:
-        print("No help available for", cmdName)
+        print("No help available for", cmd_name)

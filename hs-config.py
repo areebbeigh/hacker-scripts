@@ -18,20 +18,20 @@ from src.initialize import Initialize
 
 initializer = Initialize()
 BASE_DIRECTORY = initializer.BASE_DIRECTORY
-configFile = os.path.join(BASE_DIRECTORY, initializer.configFile)
+config_file = os.path.join(BASE_DIRECTORY, initializer.config_file)
 Config = configparser.ConfigParser()
-Config.read(configFile)
+Config.read(config_file)
 # Default path to sublime text editor 3 on Windows
-editorPath = "C:\\Program Files\\Sublime Text 3\\sublime_text.exe"
+editor_path = "C:\\Program Files\\Sublime Text 3\\sublime_text.exe"
 
-if not os.path.exists(editorPath):
-    editorPath = ""
+if not os.path.exists(editor_path):
+    editor_path = ""
 
 
-def createFile():
+def create_file():
     """Creates a new configuration file with default values"""
 
-    with open(configFile, "w") as f:
+    with open(config_file, "w") as f:
         f.write("; hacker-scripts configuration file\n")
 
         # Add sections and parameters the the config file
@@ -72,14 +72,14 @@ def createFile():
         Config.set(
             "hs-work",
             "editor",
-            editorPath)
+            editor_path)
         Config.set("hs-work", "project1", "")
         Config.set("hs-work", "project2", "")
         Config.set("hs-work", "project3", "")
 
         Config.write(f)
 
-    print("Config file has been created at " + configFile)
+    print("Config file has been created at " + config_file)
     print("You can go ahead and configure the file.")
     os.startfile('config.ini', 'edit')
     sys.exit(0)
@@ -95,21 +95,21 @@ def main():
 
     if args.help:
         cmd = sys.argv[0].partition(".")[0]
-        help.displayHelp(cmd)
+        help.display_help(cmd)
         return
 
-    if os.path.isfile(configFile):
+    if os.path.isfile(config_file):
         print("The file config.ini already exists, do you want to continue and " +
               "over-write the file with new settings? (y/N)")
 
         action = input().upper()
 
         if action == "Y" or action == "YES":
-            createFile()
+            create_file()
         else:
-            os.startfile(configFile, 'edit')  # Opens the file for editing
+            os.startfile(config_file, 'edit')  # Opens the file for editing
             sys.exit(0)
     else:
-        createFile()
+        create_file()
 
 main()

@@ -9,8 +9,10 @@ class Error(Exception):
 
 
 class ConfigError(Error):
-    """ Raised when invalid configuration is encountered
-    the configuration file """
+    """
+    Raised when invalid configuration is encountered
+    the configuration file
+    """
 
     def __init__(self, message):
         self.message = message
