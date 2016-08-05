@@ -11,29 +11,19 @@ import os
 import sys
 
 from src import help
-from src import initialize
 from src.errors import *
+from src.initialize import Initialize
+from src.configreader import ConfigReader
 
-initialize.initialize()
+initializer = Initialize()
+whiteSpace = initializer.whiteSpace
+configFile = initializer.configFile
+configReader = ConfigReader(configFile)
+# List of files and the text editor to open them with
+files, editor = configReader.readConfig("hs-work")
 
-Config = initialize.Config
-whiteSpace = initialize.whiteSpace
-
-files = []  # Files list
-editor = ""  # Text editor
-
-# Appends all file paths from the config.ini [hs-work] section to 
-# 'files' and the editor path to 'editor'
-for option in Config.options("hs-work"):
-    value = Config.get("hs-work", option)
-
-    if option != "editor" and value:
-        files.append(value)
-
-    # If the variable 'editor' is already set then we wont overwrite it
-    # This may occur if the user tries to specify more the one editors
-    elif not editor:
-        editor += value
+if not editor:
+    raise ConfigError("No editor specified for the files")
 
 
 def main():
@@ -53,7 +43,6 @@ def main():
 
 
 def execute():
-    # If at least one file is specified in config.ini then ...
     if len(files) > 0:
         for file in files:
             print("{0} Opening {1}".format(whiteSpace, file))

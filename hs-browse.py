@@ -10,20 +10,16 @@ import sys
 import webbrowser
 
 from src import help
-from src import initialize
+from src.initialize import Initialize
+from src.configreader import ConfigReader
 
-initialize.initialize()
-
-Config = initialize.Config
-whiteSpace = initialize.whiteSpace
+initializer = Initialize()
+whiteSpace = initializer.whiteSpace
+configFile = initializer.configFile
+configReader = ConfigReader(configFile)
 
 # List of URLs to open (will be filled later)
-urls = []
-
-# Appends all URLs from the config.ini [hs-browse] section to 'urls'
-for option in Config.options("hs-browse"):
-    if Config.get("hs-browse", option):
-        urls.append(Config.get("hs-browse", option))
+urls = configReader.readConfig("hs-browse")
 
 
 def main():
@@ -31,7 +27,6 @@ def main():
     parser.add_argument('--help',
                         '-help',
                         action='store_true')
-
     args = parser.parse_args()
 
     if args.help:

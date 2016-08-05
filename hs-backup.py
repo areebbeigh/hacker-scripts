@@ -11,13 +11,14 @@ import os
 import sys
 
 from src import help
-from src import initialize
 from src.errors import *
+from src.initialize import Initialize
+from src.configreader import ConfigReader
 
-initialize.initialize()
-
-Config = initialize.Config
-whiteSpace = initialize.whiteSpace
+initializer = Initialize()
+whiteSpace = initializer.whiteSpace
+configFile = initializer.configFile
+configReader = ConfigReader(configFile)
 
 
 def main():
@@ -37,8 +38,8 @@ def main():
 
 
 def isValidConfig(purge, retries, backupLocation, files):
-    """Takes all options in the "hs-backup" section as parameters and returns
-    True if they are valid, else raises a ConfigError"""
+    """ Takes all options in the "hs-backup" section as parameters and returns
+    True if they are valid, else raises a ConfigError """
 
     try:
         purge = int(purge)
@@ -65,18 +66,9 @@ def isValidConfig(purge, retries, backupLocation, files):
 
 
 def execute():
-    purge = Config.get("hs-backup", "purge")
-    retries = Config.get("hs-backup", "retries")
-    backupLocation = Config.get("hs-backup", "backup_location")
-    directories = []
-
+    purge, retries, backupLocation, directories = configReader.readConfig("hs-backup")
     logFile = "backup_log.txt"
     maxLogSize = 1 * 1024 * 1024  # Default 1 MB
-
-    for option in Config.options("hs-backup"):
-        value = Config.get("hs-backup", option)
-        if option[0:9] == "directory" and value:
-            directories.append(value)
 
     if isValidConfig(purge, retries, backupLocation, directories):
         purge = int(purge)
@@ -84,15 +76,12 @@ def execute():
 
         for file in directories:
             backup = os.path.join(backupLocation, os.path.basename(file))
-
             if not os.path.exists(backup):
                 os.makedirs(backup)
 
             src = file
             dst = backup
-
             print(whiteSpace + file, backup, sep=" -> ")
-
             # Removes the log file if it gets larger than maxLogSize (default 1 MB)
             try:
                 if os.path.getsize(logFile) > maxLogSize:

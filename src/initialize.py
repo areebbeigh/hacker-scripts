@@ -6,17 +6,17 @@ import configparser
 import os
 
 
-def initialize():
-    """Initializes stuff"""
+class Initialize:
+    """ This class does the initial stuff such as changing the CWD
+    and creating a ConfigParser object to read the configuration
+    file """
 
-    global Config
-    global whiteSpace
+    def __init__(self):
+        # Changes the current working directory to the hacker-scripts base directory
+        self.BASE_DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        os.chdir(self.BASE_DIRECTORY)
+        # White space appended before printed statements
+        self.whiteSpace = "    "
+        # Creates a ConfigParser object and reads the configuration file
+        self.configFile = "config.ini"
 
-    os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-    # Creates an instance of ConfigParser()
-    Config = configparser.ConfigParser()
-    whiteSpace = "    "
-
-    # Reads/Loads the config.ini configuration file
-    Config.read("config.ini")

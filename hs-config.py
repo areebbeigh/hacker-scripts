@@ -9,20 +9,23 @@ application
 """
 
 import argparse
+import configparser
 import os
 import sys
 
 from src import help
-from src import initialize
+from src.initialize import Initialize
 
-initialize.initialize()
-
-Config = initialize.Config
-currentDirectory = os.getcwd()
-configFile = os.path.join(currentDirectory, "config.ini")
-
+initializer = Initialize()
+BASE_DIRECTORY = initializer.BASE_DIRECTORY
+configFile = os.path.join(BASE_DIRECTORY, initializer.configFile)
+Config = configparser.ConfigParser()
+Config.read(configFile)
 # Default path to sublime text editor 3 on Windows
-editorPath = "test"
+editorPath = "C:\\Program Files\\Sublime Text 3\\sublime_text.exe"
+
+if not os.path.exists(editorPath):
+    editorPath = ""
 
 
 def createFile():
@@ -61,7 +64,9 @@ def createFile():
         Config.set("hs-start", "program3", "")
 
         Config.add_section("hs-wallpaper")
-        Config.set("hs-wallpaper", "directory", "")
+        Config.set("hs-wallpaper", "directory1", "")
+        Config.set("hs-wallpaper", "directory2", "")
+        Config.set("hs-wallpaper", "directory3", "")
 
         Config.add_section("hs-work")
         Config.set(
@@ -76,9 +81,7 @@ def createFile():
 
     print("Config file has been created at " + configFile)
     print("You can go ahead and configure the file.")
-
     os.startfile('config.ini', 'edit')
-
     sys.exit(0)
 
 
@@ -108,6 +111,5 @@ def main():
             sys.exit(0)
     else:
         createFile()
-
 
 main()

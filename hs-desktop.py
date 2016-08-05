@@ -11,24 +11,19 @@ import os
 import sys
 
 from src import help
-from src import initialize
 from src.errors import *
+from src.initialize import Initialize
+from src.configreader import ConfigReader
 
-initialize.initialize()
-
-Config = initialize.Config
-whiteSpace = initialize.whiteSpace
-
+initializer = Initialize()
+whiteSpace = initializer.whiteSpace
+configFile = initializer.configFile
+configReader = ConfigReader(configFile)
 # Gets the path to Desktop
 desktop = os.path.join(os.environ['USERPROFILE'], "Desktop")
 
-# Paths/Directories for different file types are loaded from the
-# config.ini [hs-desktop] section
-paths = {
-    "images": Config.get("hs-desktop", "images_directory"),
-    "videos": Config.get("hs-desktop", "videos_directory"),
-    "textFiles": Config.get("hs-desktop", "files_directory"),
-}
+# Paths/Directories for different file types
+paths = configReader.readConfig("hs-desktop")
 
 # Different extension types for different file types
 imageExtensions = [
@@ -85,21 +80,18 @@ def execute():
                 fileName, fileExtension = os.path.splitext(filePath)
 
                 # Further we check if the extension of the file is mentioned in
-                # any of the extensions lists above and then we put the file in
-                # the respective directory
+                # any of the extension lists above and then we put the file in
+                # the directory (from dict 'paths') matching the file type
 
                 # Check for images
                 if fileExtension.lower() in imageExtensions:
                     newLocation = os.path.join(paths["images"], file)
-
                 # Check for videos
                 elif fileExtension.lower() in videoExtensions:
                     newLocation = os.path.join(paths["videos"], file)
-
                 # Check for text files
                 elif fileExtension.lower() in textFileExtensions:
                     newLocation = os.path.join(paths["textFiles"], file)
-
                 # If the file type is unknown to the program then we skip it
                 else:
                     newLocation = None
@@ -112,7 +104,6 @@ def execute():
                         print("{0} Moved {1}".format(
                             whiteSpace,
                             os.path.basename(filePath)))
-
                     # If a file with the same name already exists then we rename
                     # the file we're operating on
                     except WindowsError:
@@ -127,7 +118,6 @@ def execute():
                                 ")" +
                                 fileExtension
                             )
-
                             count += 1
 
                         # Moves the file to "newLocation"
@@ -136,7 +126,6 @@ def execute():
                             whiteSpace,
                             os.path.basename(file),
                             os.path.basename(newLocation)))
-
     else:
         raise ConfigError("All paths are not specified in the configuration file")
 

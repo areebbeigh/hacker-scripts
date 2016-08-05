@@ -4,9 +4,9 @@ when the argument --h or --help is passed to that command
 """
 
 import os
-from src import initialize
+from src.initialize import Initialize
 
-initialize.initialize()
+initializer = Initialize()
 
 docsDir = "docs"
 header = os.path.join(docsDir, "header.txt")
@@ -25,9 +25,9 @@ cmdDocs = {
 
 
 def displayHelp(cmdName):
-    """Displays help document for given cmd name using the "more"
+    """ Displays help document for given cmd name using the "more"
     windows command, if no doc is available then prints a no help
-    available message"""
+    available message """
 
     cmdName = os.path.basename(cmdName)
     doc = os.path.join(docsDir, cmdDocs[cmdName])

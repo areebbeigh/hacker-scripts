@@ -12,12 +12,16 @@ wait for 20 seconds to use the command line again.
 import os
 import time
 
-print("Deleting temporary playlist in")
 
-# The timer
-for i in range(0,20):
-    time.sleep(1)
-    i -= 20
-    print("%s seconds\r" % i, end="")
+def main():
+    print("Deleting temporary playlist in")
+    # The timer
+    for i in range(0,20):
+        time.sleep(1)
+        i -= 20
+        print("%s seconds\r" % i, end="")
 
-os.remove('playlist.m3u')
+    os.remove('playlist.m3u')
+
+if __name__ == "__main__":
+    main()

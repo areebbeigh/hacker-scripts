@@ -10,22 +10,16 @@ import os
 import sys
 
 from src import help
-from src import initialize
 from src.errors import *
+from src.initialize import Initialize
+from src.configreader import ConfigReader
 
-initialize.initialize()
-
-Config = initialize.Config
-whiteSpace = initialize.whiteSpace
-
+initializer = Initialize()
+whiteSpace = initializer.whiteSpace
+configFile = initializer.configFile
+configReader = ConfigReader(configFile)
 # List of programs/files to be opened (will be filled later)
-files = []
-
-# Appends all program/file paths from the config.ini [hs-start] 
-# section to 'files'
-for option in Config.options("hs-start"):
-    if Config.get("hs-start", option) != "":
-        files.append(Config.get("hs-start", option))
+files = configReader.readConfig("hs-start")
 
 
 def main():
@@ -47,7 +41,6 @@ def main():
 def execute():
     # At least one program / file must be specified in the config
     if len(files) > 0:
-
         for file in files:
             if os.path.isfile(file):
                 print("{0} Opening {1}".format(whiteSpace, file))

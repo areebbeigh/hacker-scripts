@@ -13,17 +13,17 @@ import random
 import sys
 
 from src import help
-from src import initialize
 from src.errors import *
+from src.initialize import Initialize
+from src.configreader import ConfigReader
 
-initialize.initialize()
-
-Config = initialize.Config
-whiteSpace = initialize.whiteSpace
-
-# Gets the directory containing the wallpapers from the config.ini 
-# [hs-wallpaper] section
-wallpaperDirectory = Config.get("hs-wallpaper", "directory")
+initializer = Initialize()
+whiteSpace = initializer.whiteSpace
+configFile = initializer.configFile
+configReader = ConfigReader(configFile)
+# Gets a list of all the wallpapers in the directories (in the config file)
+# and in their sub-directories as well
+wallpapers = configReader.readConfig("hs-wallpaper")
 
 
 def main():
@@ -42,37 +42,14 @@ def main():
     execute()
 
 
-def getWallpapers(givenDir):
-    """Iterates over the directory of wallpapers tree and returns a list of
-    the wallpapers / images"""
-    files = os.listdir(givenDir)
-    wallpapers = []
-
-    for file in files:
-        file = os.path.join(givenDir, file)
-        extensions = [".jpg", ".png"]
-
-        # Calls check() recursively on subdirectories
-        if os.path.isdir(file):
-            wallpapers.extend(getWallpapers(file))
-
-        # If the file is an image file then ...
-        elif os.path.splitext(file)[1].lower() in extensions:
-            wallpapers.append(file)
-
-    return wallpapers
-
-
 def execute():
-    if wallpaperDirectory:
-        wallpapers = getWallpapers(wallpaperDirectory)
-
+    if wallpapers:
         # Chooses a random wallpaper from the list of wallpapers
         randomWallpaper = random.choice(wallpapers)
 
         print("{0} Setting {1} as random desktop wallpaper...".format(
             whiteSpace,
-            randomWallpaper))
+            os.path.basename(randomWallpaper)))
 
         SPI_SETDESKWALLPAPER = 20
 
@@ -82,7 +59,7 @@ def execute():
             randomWallpaper,
             0)
     else:
-        raise ConfigError("No wallpaper directory specified in the configuration file")
+        raise ConfigError("No wallpapers found in the specified directories")
 
 
 if __name__ == "__main__":

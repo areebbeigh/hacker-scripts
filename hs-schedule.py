@@ -15,11 +15,10 @@ import sys
 import time
 
 from src import help
-from src import initialize
+from src.initialize import Initialize
 
-initialize.initialize()
-
-whiteSpace = initialize.whiteSpace
+initializer = Initialize()
+whiteSpace = initializer.whiteSpace
 
 
 def main():
@@ -46,20 +45,21 @@ def main():
 
 
 def getCurrentTime():
-    """Returns the current time in 24 hr format"""
+    """ Returns the current time in 24 hr format """
 
     return time.strftime("%H:%M")
 
 
 def getCurrentDate():
-    """Returns the current date in MM/DD/YYYY format"""
+    """ Returns the current date in MM/DD/YYYY format """
 
     return time.strftime("%m/%d/%Y")
 
 
 def isValidTime(givenTime, today):
-    """Given a time string this function checks if the given time is
-    in the future today (if "today" is true) else just validates the time"""
+    """ Given a time string this function checks if the given time is
+    in the future today (if "today" is true) else just validates the time
+    """
 
     givenTime = givenTime.split(":")
     currentTime = getCurrentTime().split(":")
@@ -83,7 +83,8 @@ def isValidTime(givenTime, today):
 
 
 def isValidDate(givenDate):
-    """Given a date string this function checks if the date is in the future"""
+    """ Given a date string this function checks if the date is in the future
+    """
 
     givenDate = givenDate.split("/")
     currentDate = getCurrentDate().split("/")
@@ -110,8 +111,8 @@ def isValidDate(givenDate):
 
 
 def addTask():
-    """Takes all the information about the task to be scheduled and
-    creates the scheduled task"""
+    """ Takes all the information about the task to be scheduled and
+    creates the scheduled task """
 
     commands = []
 
@@ -167,7 +168,6 @@ def addTask():
             print("{} Invalid time".format(whiteSpace))
 
     cmdName = os.path.join(os.getcwd(), cmdName + ".py")
-
     command = "SCHTASKS /CREATE /SC ONCE /TN {0} /SD {1} /ST {2} /TR \"python '{3}'\"".format(
         taskName,
         date,
