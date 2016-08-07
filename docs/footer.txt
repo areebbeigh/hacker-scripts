@@ -1,0 +1,10 @@
+
+----------------------------------------------------------------------------
+                               -TIP-
+    If you're using a command that requires some arguments such as
+    hs-schedule or hs-manage then instead of using command prompt
+    use windows power shell since command prompt does not pass arguments
+    to the python scripts if you're running them directly.
+
+    Thank you for using hacker-scripts, you're awesome!
+----------------------------------------------------------------------------
