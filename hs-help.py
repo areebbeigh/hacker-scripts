@@ -21,8 +21,8 @@ def main():
     > hs-backup         Creates a backup of all the files in the backup location, both are specified in the config
     > hs-browse         Opens the URLs in the configuration file
     > hs-config         Creates (or overwrites) a config.ini file in the hacker-scripts directory
-    > hs-desktop        Manages your desktop files by placing different file types to their respective directories
     > hs-help           Displays this help documentation
+    > hs-manage         Manages all the files in a given directory by moving those files to their respective locations
     > hs-music          Creates and plays a temporary playlist of music files in the directories in the configuration
     > hs-schedule       Creates a new windows scheduled task that executes a hacker-scripts cmd at a time in the future
     > hs-start          Launches the programs listed in the configuration
@@ -31,8 +31,10 @@ def main():
 
     Most the above scripts depend on the config.ini file located in the hacker-scripts directory.
     If you don't find a config.ini file in your hacker-scripts directory run hs-config to create one.
-    
-    To view individual help documentation of any command use the following syntax:
+
+    The help statements for each script above is just a compact version, to view the full description,
+    configuration examples and usage details of a script use:
+
     "<command name> -h"
 
     Ex: "hs-music -h" will display hs-music's help documentation.
