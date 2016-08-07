@@ -8,16 +8,20 @@ overwriting is canceled it simply opens the config file in the default
 application
 """
 
+# Python imports
 import argparse
 import configparser
 import os
 import sys
 
+# Local imports
 from src import help
 from src.initialize import Initialize
 
 initializer = Initialize()
+# hacker-scripts base directory
 BASE_DIRECTORY = initializer.BASE_DIRECTORY
+# Full path to the config file
 config_file = os.path.join(BASE_DIRECTORY, initializer.config_file)
 Config = configparser.ConfigParser()
 Config.read(config_file)
@@ -52,6 +56,14 @@ def create_file():
         Config.set("hs-desktop", "files_directory", "")
         Config.set("hs-desktop", "images_directory", "")
         Config.set("hs-desktop", "videos_directory", "")
+
+        Config.add_section("hs-manage")
+        Config.set("hs-manage", "extension_set_1", ".txt, .ppt, .doc, .xml")
+        Config.set("hs-manage", "location_1", "")
+        Config.set("hs-manage", "extension_set_2", ".jpg, .png, .gif")
+        Config.set("hs-manage", "location_2", "")
+        Config.set("hs-manage", "extension_set_3", ".avi, .mp4, .mkv, .flv, .wmv, .m4v, .mpg, .3gp, .3g2, .f4v")
+        Config.set("hs-manage", "location_3", "")
 
         Config.add_section("hs-music")
         Config.set("hs-music", "directory1", "")
