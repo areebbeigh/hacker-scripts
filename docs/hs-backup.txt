@@ -19,12 +19,12 @@ CONFIGURATION
 Here's an example configuration:
 
 [hs-backup]
-	purge = 0
-	retries = 10
-	backup_location = D:\
-	directory1 = C:\Users\Areeb\Documents\GitHub
-	directory2 = C:\Users\Areeb\Desktop\Python
-	directory3 = C:\Users\Areeb\Desktop\Files
+	purge            = 0
+	retries          = 10
+	backup_location  = D:\
+	directory1       = C:\Users\Areeb\Documents\GitHub
+	directory2       = C:\Users\Areeb\Desktop\Python
+	directory3       = C:\Users\Areeb\Desktop\Files
 
 1. PURGE
 

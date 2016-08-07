@@ -4,4 +4,3 @@
   > github.com/areeb-beigh/hacker-scripts  
                                          
 ******************************************
-

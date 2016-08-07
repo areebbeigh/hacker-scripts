@@ -12,7 +12,7 @@ CONFIGURATION
 Here's an example configuration:
 
 [hs-work]
-	editor = C:\Program Files\Sublime Text 3\sublime_text.exe
+	editor   = C:\Program Files\Sublime Text 3\sublime_text.exe
 	project1 = C:\Users\Areeb\Desktop\Python\My Stuff\Projects\Python 3\RSS2IRC
 
 1. EDITOR
