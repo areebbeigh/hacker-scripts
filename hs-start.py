@@ -5,10 +5,12 @@
 Starts all the programs in config.ini [hs-start]
 """
 
+# Python imports
 import argparse
 import os
 import sys
 
+# Local imports
 from src import help
 from src.errors import *
 from src.initialize import Initialize

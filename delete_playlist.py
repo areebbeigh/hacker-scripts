@@ -9,6 +9,7 @@ This script is separate because if it is put in hs-music.py then the user has to
 wait for 20 seconds to use the command line again.
 """
 
+# Python imports
 import os
 import time
 

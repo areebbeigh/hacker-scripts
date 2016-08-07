@@ -6,12 +6,14 @@ Chooses a random image file from the directory specified in the config.ini
 [hs-wallpaper] section and sets it as the desktop background
 """
 
+# Python imports
 import argparse
 import ctypes
 import os
 import random
 import sys
 
+# Local imports
 from src import help
 from src.errors import *
 from src.initialize import Initialize

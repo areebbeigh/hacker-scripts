@@ -5,10 +5,12 @@
 Opens all the URLs listed in config.ini [hs-browse] section
 """
 
+# Python imports
 import argparse
 import sys
 import webbrowser
 
+# Local imports
 from src import help
 from src.initialize import Initialize
 from src.configreader import ConfigReader

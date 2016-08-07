@@ -6,10 +6,12 @@ Makes a temporary playlist of the music files in the directories in config.ini
 [hs-music] and opens it with the default media player
 """
 
+# Python imports
 import argparse
 import os
 import sys
 
+# Local imports
 from src import help
 from src.errors import *
 from src.initialize import Initialize

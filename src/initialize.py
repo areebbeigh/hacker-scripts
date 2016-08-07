@@ -7,9 +7,9 @@ import os
 
 class Initialize:
     """
-    Holds values for the base directory, white space and
-    the configuration file name as attributes to be accessed by other
-    scripts
+    Holds string properties (the base directory, white space and
+    the configuration file name) and methods for other imporatant
+    initializations
     """
 
     def __init__(self):
@@ -19,8 +19,6 @@ class Initialize:
         self._white_space = "    "
         # The configuration file name
         self._config_file = "config.ini"
-        # Changes the current working directory to the base directory
-        os.chdir(self._BASE_DIRECTORY)
 
     @property
     def BASE_DIRECTORY(self):
@@ -33,3 +31,7 @@ class Initialize:
     @property
     def config_file(self):
         return self._config_file
+
+    def change_to_base_dir(self):
+        """ Changes the current working directory to the base directory """
+        os.chdir(self.BASE_DIRECTORY)

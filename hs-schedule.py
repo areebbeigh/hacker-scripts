@@ -8,12 +8,15 @@ COMMAND script at a time in the future specified by the user
 Command used: SCHTASKS
 """
 
+# Python imports
 import argparse
 import calendar
 import os
+import re
 import sys
 import time
 
+# Local imports
 from src import help
 from src.initialize import Initialize
 
@@ -22,8 +25,6 @@ white_space = initializer.white_space
 
 
 def main():
-    cmd = sys.argv[0].partition(".")[0]
-
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('action', nargs='?')
     parser.add_argument('--help',
@@ -32,16 +33,14 @@ def main():
 
     args = parser.parse_args()
 
-    if args.help:
-        help.display_help(cmd)
-        return
-
     if args.action == "add":
         add_task()
     elif args.action == "del":
         del_task()
     else:
+        cmd = sys.argv[0].partition(".")[0]
         help.display_help(cmd)
+        return
 
 
 def get_current_time():
@@ -119,6 +118,7 @@ def add_task():
     """
 
     commands = []
+    blank_line = r"^\s+$"
 
     # List of ALL the files present in the scripts directory
     scripts = os.listdir(os.getcwd())
@@ -150,12 +150,12 @@ def add_task():
     while True:
         date = input("{} Date (leave blank if today) [MM/DD/YYYY]: ".format(white_space))
 
-        if date == "" or is_valid_date(date):
+        if (re.search(blank_line, date) or date == "") or is_valid_date(date):
             break
         else:
             print("{} Invalid date".format(white_space))
 
-    if date == "":
+    if re.search(blank_line, date) or date == "":
         date = get_current_date()
 
     while True:

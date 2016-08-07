@@ -2,7 +2,10 @@
 Adds the hacker-scripts base directory to environment variable PATH
 """
 
+# Python imports
 import os
+
+# Local imports
 from src.initialize import Initialize
 
 initializer = Initialize()

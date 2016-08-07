@@ -6,17 +6,24 @@ Module to read the configuration of different hacker-scripts from the
 given configuration file and return the results
 """
 
+# Python imports
 import configparser
 import os
+import re
 
+# Local imports
 from src.filetools import get_all_files
+from src.initialize import Initialize
+from src.errors import *
+
+initializer = Initialize()
 
 
 class ConfigReader:
     readMethods = {
         "hs-backup":     "_read_backup",
         "hs-browse":     "_read_browse",
-        "hs-desktop":    "_read_desktop",
+        "hs-manage":     "_read_manage",
         "hs-music":      "_read_music",
         "hs-start":      "_read_start",
         "hs-wallpaper":  "_read_wallpaper",
@@ -32,6 +39,9 @@ class ConfigReader:
                 The configuration file.
         """
 
+        # Switches to hacker-scripts base directory
+        initializer.change_to_base_dir()
+        # Loads the configuration file
         self.Config = configparser.ConfigParser()
         self.Config.read(configFile)
 
@@ -85,19 +95,49 @@ class ConfigReader:
 
         return urls
 
-    def _read_desktop(self, Config):
+    def _read_manage(self, Config):
         """
-        Reads hs-desktop configuration and returns a dict
-        of the configuration values
+        Reads the hs-manage configuration values and returns them
         """
 
-        paths = {
-            "images": Config.get("hs-desktop", "images_directory"),
-            "videos": Config.get("hs-desktop", "videos_directory"),
-            "textFiles": Config.get("hs-desktop", "files_directory"),
-        }
+        extensions = {}  # key - (option): value - (extensions tuple)
+        locations = {}  # key - (option): value - (directory path)
+        result = {}  # key - (directory path): value - (extensions tuple)
+        extension_re = re.compile("^extension_set_(\d+)$")  # Example: extension_set_1,  extension_set_17
+        location_re = re.compile("^location_(\d+)$")  # Example: location_1, location_17
 
-        return paths
+        for option in Config.options("hs-manage"):
+            ext_match = extension_re.search(option)
+            opt_match = location_re.search(option)
+            value = Config.get("hs-manage", option)
+
+            if ext_match:
+                extensions[option] = tuple(value.replace(" ", "").split(","))
+            elif opt_match:
+                locations[option] = value
+            else:
+                raise ConfigError("Invalid option name: '{}'".format(option))
+
+        for i in range(len(extensions)):
+            i += 1
+            extension_set = extensions.get("extension_set_" + str(i), None)
+            location = locations.get("location_" + str(i), None)
+            if extension_set and location:
+                # Check if the location is a directory
+                if not os.path.isdir(location):
+                    raise ConfigError("Invalid directory: {}".format(location))
+                # Check if the extensions are in the proper format
+                for extension in extension_set:
+                    if not re.search(r"^\.[\w]+$", extension):
+                        raise ConfigError("Invalid extension: {}".format(extension))
+                # If no error occurs then add the location-extensions pair to results
+                result[tuple(extension_set)] = location
+            else:
+                raise ConfigError("Invalid extensions-location pair: ({0})-{1}".format(
+                    extension_set,
+                    location))
+
+        return result
 
     def _read_music(self, Config):
         """

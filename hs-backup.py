@@ -6,10 +6,12 @@ Automatically creates a backup of all the files in the backup location. Both,
 the files and the backup location are specified in the configuration
 """
 
+# Python imports
 import argparse
 import os
 import sys
 
+# Local imports
 from src import help
 from src.errors import *
 from src.initialize import Initialize
