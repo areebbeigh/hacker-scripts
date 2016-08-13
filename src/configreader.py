@@ -70,7 +70,7 @@ class ConfigReader:
 
         purge = Config.get("hs-backup", "purge")
         retries = Config.get("hs-backup", "retries")
-        backupLocation = Config.get("hs-backup", "backup_location")
+        backup_location = Config.get("hs-backup", "backup_location")
         directories = []
 
         for option in Config.options("hs-backup"):
@@ -78,7 +78,7 @@ class ConfigReader:
             if option[0:9] == "directory" and value:
                 directories.append(value)
 
-        return purge, retries, backupLocation, directories
+        return purge, retries, backup_location, directories
 
     def _read_browse(self, Config):
         """
@@ -102,7 +102,7 @@ class ConfigReader:
 
         extensions = {}  # key - (option): value - (extensions tuple)
         locations = {}  # key - (option): value - (directory path)
-        result = {}  # key - (directory path): value - (extensions tuple)
+        result = {}  # key - (extensions tuple): value - (directory path)
         extension_re = re.compile("^extension_set_(\d+)$")  # Example: extension_set_1,  extension_set_17
         location_re = re.compile("^location_(\d+)$")  # Example: location_1, location_17
 
@@ -151,14 +151,14 @@ class ConfigReader:
             ".ogg",
             ".flac",
         ]
-        musicFiles = []
+        music_files = []
 
         for option in Config.options("hs-music"):
             directory = Config.get("hs-music", option)
             if os.path.isdir(directory):
-                musicFiles.extend(get_all_files(directory, extensions))
+                music_files.extend(get_all_files(directory, extensions))
 
-        return musicFiles
+        return music_files
 
 
     def _read_start(self, Config):
