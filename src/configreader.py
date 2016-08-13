@@ -20,6 +20,7 @@ initializer = Initialize()
 
 
 class ConfigReader:
+    # Read method names for each hacker-script
     readMethods = {
         "hs-backup":     "_read_backup",
         "hs-browse":     "_read_browse",
