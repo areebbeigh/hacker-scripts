@@ -10,7 +10,6 @@ import sys
 
 # Local imports
 from src import help
-from src.errors import *
 from src.initialize import Initialize
 from src.configreader import ConfigReader
 
@@ -18,7 +17,7 @@ initializer = Initialize()
 white_space = initializer.white_space
 config_file = initializer.config_file
 config_reader = ConfigReader(config_file)
-# Gets a Directory-Extensions key-value pair
+# Gets a Extensions-Directory key-value pair
 loc_pairs = config_reader.read_config("hs-manage")
 
 
