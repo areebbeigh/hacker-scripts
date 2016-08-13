@@ -52,11 +52,6 @@ def create_file():
         Config.set("hs-browse", "url2", "")
         Config.set("hs-browse", "url3", "")
 
-        Config.add_section("hs-desktop")
-        Config.set("hs-desktop", "files_directory", "")
-        Config.set("hs-desktop", "images_directory", "")
-        Config.set("hs-desktop", "videos_directory", "")
-
         Config.add_section("hs-manage")
         Config.set("hs-manage", "extension_set_1", ".txt, .ppt, .doc, .xml")
         Config.set("hs-manage", "location_1", "")
