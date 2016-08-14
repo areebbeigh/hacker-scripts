@@ -92,13 +92,13 @@ def execute():
                 pass
 
             if purge == 0:
-                command = "ROBOCOPY /LOG+:\"{0}\" /V /E /R:{1} {2} {3}".format(
+                command = "ROBOCOPY /LOG+:\"{0}\" /V /E /R:{1} \"{2}\" \"{3}\"".format(
                     log_file,
                     retries,
                     src,
                     dst)
             elif purge == 1:
-                command = "ROBOCOPY /LOG+:\"{0}\" /V /E /PURGE /R:{1} {2} {3}".format(
+                command = "ROBOCOPY /LOG+:\"{0}\" /V /E /PURGE /R:{1} \"{2}\" \"{3}\"".format(
                     log_file,
                     retries,
                     src,
