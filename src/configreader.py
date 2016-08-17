@@ -22,18 +22,19 @@ initializer = Initialize()
 class ConfigReader:
     # Read method names for each hacker-script
     readMethods = {
-        "hs-backup":     "_read_backup",
-        "hs-browse":     "_read_browse",
-        "hs-manage":     "_read_manage",
-        "hs-music":      "_read_music",
-        "hs-start":      "_read_start",
-        "hs-wallpaper":  "_read_wallpaper",
-        "hs-work":       "_read_work",
+        "hs-backup": "_read_backup",
+        "hs-browse": "_read_browse",
+        "hs-manage": "_read_manage",
+        "hs-music": "_read_music",
+        "hs-start": "_read_start",
+        "hs-wallpaper": "_read_wallpaper",
+        "hs-work": "_read_work",
     }
 
     def __init__(self, configFile):
         """
-        Creates a ConfigParser object and reads the given configuration file
+        Creates a configparser.ConfigParser() object and reads the given
+        configuration file
 
         Parameters:
             configFile:
@@ -160,7 +161,6 @@ class ConfigReader:
                 music_files.extend(get_all_files(directory, extensions))
 
         return music_files
-
 
     def _read_start(self, Config):
         """
