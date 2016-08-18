@@ -9,7 +9,7 @@ def generate_config_string():
     """ Generates a configuration string with mock values and  returns it """
 
     initializer = Initialize()
-    test_directory = os.path.join(initializer.BASE_DIRECTORY, "tests","test_directory")
+    test_directory = os.path.join(initializer.BASE_DIRECTORY, "tests", "test_directory")
     test_locations = {
         'ext_dir_1': os.path.join(test_directory, "hs_manage", "extn_dir_1"),
         'ext_dir_2': os.path.join(test_directory, "hs_manage", "extn_dir_2"),

@@ -1,5 +1,5 @@
 """
-Adds the hacker-scripts base directory to environment variable PATH
+Adds the hacker-scripts base directory to PATH
 """
 
 # Python imports
