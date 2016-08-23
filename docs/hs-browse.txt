@@ -3,8 +3,8 @@ DESCRIPTION
 
 hs-browse
 
-This command will simply open all the URLs that are specified in 
-the configuration with the default web browser.
+Opens all the URLs are specified in the configuration with the
+default web browser available.
 
 CONFIGURATION
 -------------

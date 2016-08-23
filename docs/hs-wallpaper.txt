@@ -3,8 +3,8 @@ DESCRIPTION
 
 hs-wallpaper
 
-This command scans the given wallpaper directory (including sub-directories) for 
-it's images and sets a random image from them as your desktop wallpaper.
+Scans the given wallpaper directory (including sub-directories) for  it's
+images and sets a random image from them as your desktop wallpaper.
 
 CONFIGURATION
 -------------

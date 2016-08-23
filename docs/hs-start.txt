@@ -3,7 +3,7 @@ DESCRIPTION
 
 hs-start
 
-This command launches all the programs specified in the configuration when run.
+Launches all the programs specified in the configuration.
 
 "Why would I need this?"
 

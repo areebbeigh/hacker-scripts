@@ -3,8 +3,8 @@ DESCRIPTION
 
 hs-work
 
-This command will open all the files specified in the configuration with
-a text editor, which again will be specified in the configuration.
+Opens all the files specified in the configuration with the text editor specified
+in the configuration.
 
 CONFIGURATION
 -------------

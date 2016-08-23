@@ -3,15 +3,13 @@ DESCRIPTION
 
 hs-backup
 
-This command will automatically create a backup of the
-directories that you add in the configuration. The backup location
-is also set in the configuration itself. The script uses the windows
-'ROBOCOPY' command to backup the files more efficiently and quickly.
+Automatically creates a backup of the directories specified in the configuration
+using the windows ROBOCOPY command.
 
-Each time a backup is complete the log is appended to the backup log
-file which can be found in the hacker-scripts directory itself.
+Each time a backup is complete the log is appended to the backup log file
+which can be found in the hacker-scripts directory.
 
-The log is automatically cleared after the size exceeds 1 MB.
+The log file is automatically cleared after the size exceeds 1 MB.
 
 CONFIGURATION
 -------------
@@ -28,11 +26,11 @@ Here's an example configuration:
 
 1. PURGE
 
-PURGE may have 2 values, either 0 (i.e off) or 1 (i.e on)
+PURGE may have 2 values, either 0 (OFF) or 1 (ON)
 
-If PURGE is on then the files that do not exist in the source anymore
+If PURGE is ON then the files that do not exist in the source anymore
 will be deleted from the backup location. If you prefer to keep deleted files
-on your backup then set it to 0.
+on your backup then set it to 0 (OFF).
 
 2. RETRIES
 

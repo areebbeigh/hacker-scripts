@@ -30,42 +30,54 @@ from src.initialize import Initialize
 initializer = Initialize()
 initializer.change_to_base_dir()
 
-docsDir = "docs"
-header = os.path.join(docsDir, "header.txt")
-footer = os.path.join(docsDir, "footer.txt")
+docs_dir = "docs"
+header = os.path.join(docs_dir, "header.txt")
+footer = os.path.join(docs_dir, "footer.txt")
+arg_tip = os.path.join(docs_dir, "tip1.txt")  # Tip for cmds that require arguments
 
-cmdDocs = {
-    "hs-backup":    "hs-backup.txt",
-    "hs-browse":    "hs-browse.txt",
-    "hs-config":    "hs-config.txt",
-    "hs-desktop":   "hs-desktop.txt",
-    "hs-manage":    "hs-manage.txt",
-    "hs-music":     "hs-music.txt",
-    "hs-schedule":  "hs-schedule.txt",
-    "hs-start":     "hs-start.txt",
+cmd_docs = {
+    "hs-backup": "hs-backup.txt",
+    "hs-browse": "hs-browse.txt",
+    "hs-config": "hs-config.txt",
+    "hs-desktop": "hs-desktop.txt",
+    "hs-manage": "hs-manage.txt",
+    "hs-music": "hs-music.txt",
+    "hs-schedule": "hs-schedule.txt",
+    "hs-start": "hs-start.txt",
     "hs-wallpaper": "hs-wallpaper.txt",
-    "hs-work":      "hs-work.txt",
+    "hs-work": "hs-work.txt",
 }
+
+arg_cmds = ["hs-backup", "hs-manage", "hs-schedule"]  # Cmds that require arguments
+
+
+def more(file_name):
+    """
+    Displays the text in the given file name on the terminal using the "more"
+    terminal command.
+    """
+
+    os.system("more \"{}\"".format(file_name))
 
 
 def display_help(cmd_name):
     """
-    Displays help document for given cmd name using the "more"
-    windows command, if no doc is available then prints a no help
-    available message
+    Displays help document for given cmd name.
     """
 
     cmd_name = os.path.basename(cmd_name)
     doc = ''
     try:
-        doc = os.path.join(docsDir, cmdDocs[cmd_name])
+        doc = os.path.join(docs_dir, cmd_docs[cmd_name])
     except KeyError:
         print("No help available for", cmd_name)
         exit()
 
     if os.path.exists(doc):
-        os.system("more \"{}\"".format(header))
-        os.system("more \"{}\"".format(doc))
-        os.system("more \"{}\"".format(footer))
+        more(header)
+        more(doc)
+        if cmd_name in arg_cmds:
+            more(arg_tip)
+        more(footer)
     else:
         print("No help available for", cmd_name)

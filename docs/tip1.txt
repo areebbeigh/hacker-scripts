@@ -1,0 +1,8 @@
+
+----------------------------------------------------------------------------
+                               -TIP-
+    If you're using a command that requires some arguments (such as
+    hs-schedule or hs-manage) in Command Prompt and it does not parse
+    the arguments then use Windows PowerShell instead.
+
+----------------------------------------------------------------------------

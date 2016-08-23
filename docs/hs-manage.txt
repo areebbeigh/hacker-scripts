@@ -3,17 +3,9 @@ DESCRIPTION
 
 hs-manage
 
-This is a useful command/script that will manage all the files in a given directory
-(passed as an argument) by moving the files whose extensions are in a given list
-of extensions (set in the configuration) to the directory (which again is set in the
-configuration) they should be in.
-
-If you used hs-config and took a look at the configuration file, you'll notice that
-there are preset values for extension_set_[1-3], don't worry those are not anything
-permanent. You can change or remove them if you want or keep them and set the locations.
-
-Those are the extensions of 3 most common file types that people have viz documents, images
-and videos.
+Manages all the files in a given directory (passed as an argument) by moving the files
+whose extensions are in a given set of extensions (set in the configuration) to the
+directory (which again is set in the configuration) associated with them.
 
 CONFIGURATION
 -------------
@@ -40,7 +32,7 @@ Well, it's self explanatory.
 IMPORTANT NOTES:
 
 - When you enter extensions they must be in the same format as in the above example,
-no extra brackets or punctuations.
+  no extra brackets or punctuations.
 
 - For each extension_set_x option there should be a location_x option and vice versa.
 

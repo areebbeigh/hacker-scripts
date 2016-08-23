@@ -3,12 +3,12 @@ DESCRIPTION
 
 hs-config
 
-This command creates a new configuration file named 'config.ini' at 
-the location where hacker-scripts is installed.
+Creates a new configuration file named 'config.ini' in the hacker-scripts
+main directory.
 
-If it already exists you will be asked if you want to overwrite the
-file, if you cancel the overwrite operation the configuration file 
-will open in notepad for you to edit.
+If it already exists you will be asked if you want to overwrite the file,
+if you cancel the overwrite operation the configuration file will open
+with the default text editor for .ini files.
 
 USAGE
 -----
