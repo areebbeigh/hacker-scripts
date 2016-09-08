@@ -26,12 +26,4 @@ time the cmd/script is run.
 USAGE
 -----
 
-hs-start [-h]
-
-Required arguments:
-
-None
-
-Optional arguments:
-
---h, -h		Display this help documentation
+Check hs-start -h

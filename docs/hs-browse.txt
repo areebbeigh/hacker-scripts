@@ -24,12 +24,4 @@ The URLs.
 USAGE
 -----
 
-hs-browse [-h]
-
-Required arguments:
-
-None
-
-Optional arguments:
-
---h, -h		Display this help documentation
+Check hs-browse -h

@@ -35,30 +35,38 @@ from src.initialize import Initialize
 from src.configreader import ConfigReader
 
 initializer = Initialize()
-white_space = initializer.white_space
 config_file = initializer.config_file
 config_reader = ConfigReader(config_file)
 
 
 def main():
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('--help',
-                        '-help',
-                        action='store_true')
-
+    parser = argparse.ArgumentParser(add_help=True, allow_abbrev=False)
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('-d',
+                       '--directory',
+                       metavar='DIR',
+                       nargs=1,
+                       help='backup location')
+    group.add_argument('-dh',
+                       '--dhelp',
+                       action='store_true',
+                       help='displays detailed help for this hacker-script')
     args = parser.parse_args()
 
-    if args.help:
+    if args.dhelp:
         cmd = sys.argv[0].partition(".")[0]
         help.display_help(cmd)
         return
 
-    execute()
+    if args.directory:
+        execute(args.directory[0])
+    else:
+        execute()
 
 
 def is_valid_config(purge, retries, backup_location, files):
-    """ Takes all options in the "hs-backup" section as parameters and returns
-    True if they are valid, else raises a ConfigError """
+    """Takes all options in the "hs-backup" section as parameters and returns
+    True if they are valid, else raises a ConfigError"""
 
     try:
         purge = int(purge)
@@ -84,8 +92,13 @@ def is_valid_config(purge, retries, backup_location, files):
     return True
 
 
-def execute():
-    purge, retries, backup_location, directories = config_reader.read_config("hs-backup")
+def execute(backup_location=None):
+    if not backup_location:
+        purge, retries, backup_location, directories = config_reader.read_config("hs-backup")
+    else:
+        purge, retries, dummy, directories = config_reader.read_config("hs-backup")
+
+    print(" Backing up all files to", backup_location)
     log_file = "backup_log.txt"
     max_log_size = 1 * 1024 * 1024  # Default 1 MB
 
@@ -97,10 +110,9 @@ def execute():
             backup = os.path.join(backup_location, os.path.basename(file))
             if not os.path.exists(backup):
                 os.makedirs(backup)
-
             src = file
             dst = backup
-            print(white_space + file, backup, sep=" -> ")
+            print(" " + file, backup, sep=" -> ", end="")
             # Removes the log file if it gets larger than max_log_size (default 1 MB)
             try:
                 if os.path.getsize(log_file) > max_log_size:
@@ -114,7 +126,7 @@ def execute():
                     retries,
                     src,
                     dst)
-            elif purge == 1:
+            else:
                 command = "ROBOCOPY /LOG+:\"{0}\" /V /E /PURGE /R:{1} \"{2}\" \"{3}\"".format(
                     log_file,
                     retries,
@@ -122,7 +134,7 @@ def execute():
                     dst)
 
             os.system(command)
-
+            print()
 
 if __name__ == "__main__":
     main()

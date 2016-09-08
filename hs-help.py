@@ -5,6 +5,7 @@
 Prints a brief help documentation to the terminal
 """
 
+
 #############################################################################
 #    Copyright (C) 2016  Areeb Beigh <areebbeigh@gmail.com>                 #
 #                                                                           #
@@ -51,7 +52,7 @@ def main():
     The help statements for each script above is just a compact version, to view the full description,
     configuration examples and usage details of a script use:
 
-    "<command name> -h"
+    "<command name> -dh"
 
     Ex: "hs-music -h" will display hs-music's help documentation.
     """)

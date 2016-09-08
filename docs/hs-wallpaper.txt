@@ -21,12 +21,4 @@ The directory that contains your wallpapers.
 USAGE
 -----
 
-hs-wallpaper [-h]
-
-Required arguments:
-
-None
-
-Optional arguments:
-
---h, -h		Display this help documentation
+Check hs-wallpaper -h

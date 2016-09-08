@@ -34,7 +34,6 @@ from src.initialize import Initialize
 from src.configreader import ConfigReader
 
 initializer = Initialize()
-white_space = initializer.white_space
 config_file = initializer.config_file
 config_reader = ConfigReader(config_file)
 # Gets a Extensions-Directory key-value pair
@@ -42,19 +41,23 @@ loc_pairs = config_reader.read_config("hs-manage")
 
 
 def main():
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('--help',
-                        '-help',
-                        action='store_true')
-    parser.add_argument('directory',
-                        nargs='?',
-                        help='directory to manage files in')
+    parser = argparse.ArgumentParser(add_help=True, allow_abbrev=False)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('-d',
+                       '--directory',
+                       nargs=1,
+                       metavar='DIR',
+                       help='directory to manage files in')
+    group.add_argument('-dh',
+                       '--dhelp',
+                       action='store_true',
+                       help='displays detailed help for this hacker-script')
 
     args = parser.parse_args()
 
     if args.directory:
-        execute(args.directory)
-    else:
+        execute(args.directory[0])
+    elif args.dhelp:
         cmd = sys.argv[0].partition(".")[0]
         help.display_help(cmd)
         return
@@ -78,25 +81,23 @@ def execute(directory):
                     _file = name + "(" + str(i) + ")" + "." + extension
                     new_location = os.path.join(new_directory, _file)
                     if not os.path.exists(new_location):
-                        print("{0} Renaming {1} to {2} since file already exists".format(
-                            white_space,
+                        print(" Renaming {0} to {1} since file already exists".format(
                             file,
                             os.path.basename(new_location)
                         ))
                 # Uses windows shell command if the new location drive is different
                 # from the old location drive because Python's os.rename can't move files
                 # from one drive to another on windows
-                if os.path.splitdrive(new_location) == os.path.splitdrive(old_location):
+                if os.path.splitdrive(new_location)[0] == os.path.splitdrive(old_location)[0]:
                     os.rename(old_location, new_location)
                 else:
-                    print("{} -> Other drive detected, sing windows move command".format(white_space))
+                    print(" -> Other drive detected, using windows move command")
                     command = "move /-Y \"{0}\" \"{1}\"".format(
                         old_location,
                         new_location
                     )  # /-Y - prompt to overwrite (which shouldn't occur actually but eh)
                     os.system(command)
-                print("{0} Moved {1} to {2}".format(
-                    white_space,
+                print(" Moved {0} to {1}".format(
                     file,
                     new_directory
                 ))

@@ -19,12 +19,13 @@ WAIT_TIME = 20  # Seconds to wait before deleting the playlist
 def main():
     print("Deleting temporary playlist in")
     # The timer
-    for i in range(0,WAIT_TIME):
+    for i in range(0, WAIT_TIME):
         time.sleep(1)
         i -= 20
         print("%s seconds\r" % i, end="")
 
     os.remove('playlist.m3u')
+
 
 if __name__ == "__main__":
     main()

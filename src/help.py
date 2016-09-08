@@ -24,12 +24,7 @@ when the argument --h or --help is passed to that command
 # Python imports
 import os
 
-# Local imports
-from src.initialize import Initialize
-
-initializer = Initialize()
-initializer.change_to_base_dir()
-
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # Base directory
 docs_dir = "docs"
 header = os.path.join(docs_dir, "header.txt")
 footer = os.path.join(docs_dir, "footer.txt")
@@ -48,7 +43,7 @@ cmd_docs = {
     "hs-work": "hs-work.txt",
 }
 
-arg_cmds = ["hs-backup", "hs-manage", "hs-schedule"]  # Cmds that require arguments
+arg_cmds = ["hs-backup", "hs-manage", "hs-schedule"]  # CMDs that require arguments
 
 
 def more(file_name):

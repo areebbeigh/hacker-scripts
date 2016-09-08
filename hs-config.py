@@ -49,6 +49,34 @@ if not os.path.exists(editor_path):
     editor_path = ""
 
 
+def main():
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument('--help',
+                        '-help',
+                        action='store_true')
+
+    args = parser.parse_args()
+
+    if args.help:
+        cmd = sys.argv[0].partition(".")[0]
+        help.display_help(cmd)
+        return
+
+    if os.path.isfile(config_file):
+        print("The file config.ini already exists, do you want to continue and " +
+              "over-write the file with new settings? (y/N)")
+
+        action = input().upper()
+
+        if action == "Y" or action == "YES":
+            create_file()
+        else:
+            os.startfile(config_file, 'edit')  # Opens the file for editing
+            sys.exit(0)
+    else:
+        create_file()
+
+
 def create_file():
     """Creates a new configuration file with default values"""
 
@@ -108,32 +136,5 @@ def create_file():
     os.startfile('config.ini', 'edit')
     sys.exit(0)
 
-
-def main():
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('--help',
-                        '-help',
-                        action='store_true')
-
-    args = parser.parse_args()
-
-    if args.help:
-        cmd = sys.argv[0].partition(".")[0]
-        help.display_help(cmd)
-        return
-
-    if os.path.isfile(config_file):
-        print("The file config.ini already exists, do you want to continue and " +
-              "over-write the file with new settings? (y/N)")
-
-        action = input().upper()
-
-        if action == "Y" or action == "YES":
-            create_file()
-        else:
-            os.startfile(config_file, 'edit')  # Opens the file for editing
-            sys.exit(0)
-    else:
-        create_file()
 
 main()

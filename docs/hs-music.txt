@@ -27,12 +27,4 @@ Supported file types:
 USAGE
 -----
 
-hs-music [-h]
-
-Required arguments:
-
-None
-
-Optional arguments:
-
---h, -h		Display this help documentation
+Check hs-music -h

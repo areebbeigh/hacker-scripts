@@ -13,12 +13,4 @@ with the default text editor for .ini files.
 USAGE
 -----
 
-hs-config [-h]
-
-Required arguments:
-
-None
-
-Optional arguments:
-
---h, -h		Display this help documentation
+Check hs-config -h

@@ -9,18 +9,18 @@ import os
 from src.initialize import Initialize
 
 initializer = Initialize()
+BASE_DIRECTORY = initializer.BASE_DIRECTORY
+# PATH environment variable
+PATH = os.environ['PATH']
 
 
 def main():
-    """ Checks if the base directory already exists in PATH,
-    if not then adds it """
+    """ Checks if the base directory already exists in PATH, if not then adds it """
     # The base directory
-    BASE_DIRECTORY = initializer.BASE_DIRECTORY
-    # PATH environment variable
-    PATH = os.environ['PATH']
     if BASE_DIRECTORY not in PATH.split(os.pathsep):
         os.system("setx PATH \"\"")
         os.system("setx PATH \"{0};{1}\"".format(PATH, BASE_DIRECTORY))
+
 
 if __name__ == "__main__":
     main()

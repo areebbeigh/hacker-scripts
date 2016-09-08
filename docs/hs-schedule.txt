@@ -11,24 +11,4 @@ This script uses the windows SCHTASKS command to create scheduled tasks.
 USAGE
 -----
 
-hs-schedule [-h] add|del
-
-Required arguments:
-
-add OR del
-
-add         Add a new scheduled task
-del         Delete an existing scheduled task
-
-Optional arguments:
-
---h, -h		Display this help documentation
-
-Example:
-
-$ hs-schedule add
-     Task name: me_time
-     Command name: hs-music
-     Date (leave blank if today) [MM/DD/YYYY]: 08/08/2016
-     Time [HH:MM]: 17:00
-SUCCESS: The scheduled task "me_time" has successfully been created.
+Check hs-schedule -h

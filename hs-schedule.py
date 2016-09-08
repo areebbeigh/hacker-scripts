@@ -38,26 +38,29 @@ from src import help
 from src.initialize import Initialize
 
 initializer = Initialize()
-white_space = initializer.white_space
 
 
 def main():
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('action', nargs='?')
-    parser.add_argument('--help',
-                        '-help',
-                        action='store_true')
-
+    parser = argparse.ArgumentParser(add_help=True, allow_abbrev=False)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('-a',
+                       '--action',
+                       choices=['add', 'del'],
+                       help='add/del scheduled tasks')
+    group.add_argument('-dh',
+                       '--dhelp',
+                       action='store_true',
+                       help='displays detailed help for this hacker-script')
     args = parser.parse_args()
 
-    if args.action == "add":
-        add_task()
-    elif args.action == "del":
-        del_task()
-    else:
+    if args.dhelp:
         cmd = sys.argv[0].partition(".")[0]
         help.display_help(cmd)
         return
+    elif args.action == "add":
+        add_task()
+    else:
+        del_task()
 
 
 def get_current_time():
@@ -125,8 +128,6 @@ def is_valid_date(given_date):
         (given_year == current_year and given_month > current_month) or
         (given_year > current_year))
 
-    return False
-
 
 def add_task():
     """
@@ -149,34 +150,34 @@ def add_task():
             commands.append(cmd_name)
 
     while True:
-        task_name = input("{} Task name: ".format(white_space))
+        task_name = input(" Task name: ")
 
         if task_name:
             break
         else:
-            print("{} Invalid task name".format(white_space))
+            print(" Invalid task name")
 
     while True:
-        cmd_name = input("{} Command name: ".format(white_space))
+        cmd_name = input(" Command name: ")
 
         if cmd_name in commands:
             break
         else:
-            print("{} Invalid command".format(white_space))
+            print(" Invalid command")
 
     while True:
-        date = input("{} Date (leave blank if today) [MM/DD/YYYY]: ".format(white_space))
+        date = input(" Date (leave blank if today) [MM/DD/YYYY]: ")
 
         if (re.search(blank_line, date) or date == "") or is_valid_date(date):
             break
         else:
-            print("{} Invalid date".format(white_space))
+            print(" Invalid date")
 
     if re.search(blank_line, date) or date == "":
         date = get_current_date()
 
     while True:
-        task_time = input("{} Time [HH:MM]: ".format(white_space))
+        task_time = input(" Time [HH:MM]: ")
 
         if date == get_current_date():
             check = is_valid_time(task_time, True)
@@ -186,7 +187,7 @@ def add_task():
         if check:
             break
         else:
-            print("{} Invalid time".format(white_space))
+            print(" Invalid time")
 
     cmd_name = os.path.join(os.getcwd(), cmd_name + ".py")
     command = "SCHTASKS /CREATE /SC ONCE /TN {0} /SD {1} /ST {2} /TR \"python '{3}'\"".format(
@@ -205,14 +206,14 @@ def del_task():
     """
 
     while True:
-        task_name = input("{} Enter task name: ".format(white_space))
+        task_name = input(" Enter task name: ")
 
         if task_name:
             break
         else:
-            print("{} Invalid task name".format(white_space))
+            print(" Invalid task name")
 
-    command = "SCHTASKS /DELETE /TN {}".format(task_name)
+    command = "SCHTASKS /DELETE /TN", task_name
 
     os.system(command)
 

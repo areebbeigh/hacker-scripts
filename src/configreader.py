@@ -46,13 +46,13 @@ class ConfigReader:
         "hs-work": "_read_work",
     }
 
-    def __init__(self, configFile):
+    def __init__(self, config_file):
         """
         Creates a configparser.ConfigParser() object and reads the given
         configuration file
 
         Parameters:
-            configFile:
+            config_file:
                 The configuration file.
         """
 
@@ -60,7 +60,7 @@ class ConfigReader:
         initializer.change_to_base_dir()
         # Loads the configuration file
         self.Config = configparser.ConfigParser()
-        self.Config.read(configFile)
+        self.Config.read(config_file)
 
     def read_config(self, script):
         """
@@ -79,25 +79,25 @@ class ConfigReader:
 
         return eval("self." + self.readMethods[script])(self.Config)
 
-    def _read_backup(self, Config):
+    def _read_backup(self, config):
         """
         Reads hs-backup configuration and returns a tuple of
         configuration values
         """
 
-        purge = Config.get("hs-backup", "purge")
-        retries = Config.get("hs-backup", "retries")
-        backup_location = Config.get("hs-backup", "backup_location")
+        purge = config.get("hs-backup", "purge")
+        retries = config.get("hs-backup", "retries")
+        backup_location = config.get("hs-backup", "backup_location")
         directories = []
 
-        for option in Config.options("hs-backup"):
-            value = Config.get("hs-backup", option)
+        for option in config.options("hs-backup"):
+            value = config.get("hs-backup", option)
             if option[0:9] == "directory" and value:
                 directories.append(value)
 
         return purge, retries, backup_location, directories
 
-    def _read_browse(self, Config):
+    def _read_browse(self, config):
         """
         Reads hs-browse configuration and returns a list of
         urls
@@ -105,14 +105,14 @@ class ConfigReader:
 
         urls = []
 
-        for option in Config.options("hs-browse"):
-            url = Config.get("hs-browse", option)
+        for option in config.options("hs-browse"):
+            url = config.get("hs-browse", option)
             if url:
                 urls.append(url)
 
         return urls
 
-    def _read_manage(self, Config):
+    def _read_manage(self, config):
         """
         Reads the hs-manage configuration values and returns them
         """
@@ -123,10 +123,10 @@ class ConfigReader:
         extension_re = re.compile("^extension_set_(\d+)$")  # Example: extension_set_1,  extension_set_17
         location_re = re.compile("^location_(\d+)$")  # Example: location_1, location_17
 
-        for option in Config.options("hs-manage"):
+        for option in config.options("hs-manage"):
             ext_match = extension_re.search(option)
             opt_match = location_re.search(option)
-            value = Config.get("hs-manage", option)
+            value = config.get("hs-manage", option)
 
             if ext_match:
                 extensions[option] = tuple(value.replace(" ", "").split(","))
@@ -156,7 +156,7 @@ class ConfigReader:
 
         return result
 
-    def _read_music(self, Config):
+    def _read_music(self, config):
         """
         Reads hs-music configuration and returns a list of
         directories in it
@@ -170,14 +170,14 @@ class ConfigReader:
         ]
         music_files = []
 
-        for option in Config.options("hs-music"):
-            directory = Config.get("hs-music", option)
+        for option in config.options("hs-music"):
+            directory = config.get("hs-music", option)
             if os.path.isdir(directory):
                 music_files.extend(get_all_files(directory, extensions))
 
         return music_files
 
-    def _read_start(self, Config):
+    def _read_start(self, config):
         """
         Reads hs-start configuration and returns a list of programs/files
         in it
@@ -185,13 +185,13 @@ class ConfigReader:
 
         files = []
 
-        for option in Config.options("hs-start"):
-            if Config.get("hs-start", option):
-                files.append(Config.get("hs-start", option))
+        for option in config.options("hs-start"):
+            if config.get("hs-start", option):
+                files.append(config.get("hs-start", option))
 
         return files
 
-    def _read_wallpaper(self, Config):
+    def _read_wallpaper(self, config):
         """
         Reads hs-wallpaper configuration and returns a list of directories
         in it
@@ -200,14 +200,14 @@ class ConfigReader:
         extensions = [".png", ".jpg"]
         wallpapers = []
 
-        for option in Config.options("hs-wallpaper"):
-            directory = Config.get("hs-wallpaper", option)
+        for option in config.options("hs-wallpaper"):
+            directory = config.get("hs-wallpaper", option)
             if os.path.isdir(directory):
                 wallpapers.extend(get_all_files(directory, extensions))
 
         return wallpapers
 
-    def _read_work(self, Config):
+    def _read_work(self, config):
         """
         Reads the hs-work configuration and returns a list of files and
         the text editor to open them with
@@ -216,8 +216,8 @@ class ConfigReader:
         files = []
         editor = ""
 
-        for option in Config.options("hs-work"):
-            value = Config.get("hs-work", option)
+        for option in config.options("hs-work"):
+            value = config.get("hs-work", option)
             if option != "editor" and value:
                 files.append(value)
             elif option == "editor":

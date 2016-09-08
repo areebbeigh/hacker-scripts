@@ -39,16 +39,4 @@ IMPORTANT NOTES:
 USAGE
 -----
 
-hs-manage [-h] directory
-
-Required arguments:
-
-directory   The directory to manage the files of
-
-Optional arguments:
-
---h, -h		Display this help documentation
-
-Example:
-
-hs-manage "C:\Users\Areeb\Desktop"
+Check hs-manage -h

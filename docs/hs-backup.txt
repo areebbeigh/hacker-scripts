@@ -4,6 +4,8 @@ DESCRIPTION
 hs-backup
 
 Automatically creates a backup of the directories specified in the configuration
+(or the directory supplied as an argument with the --directory parameter,
+check usage for more info)
 using the windows ROBOCOPY command.
 
 Each time a backup is complete the log is appended to the backup log file
@@ -51,12 +53,4 @@ is run.
 USAGE
 -----
 
-hs-backup [-h]
-
-Required arguments:
-
-None
-
-Optional arguments:
-
---h, -h		Display this help documentation
+Check hs-backup -h

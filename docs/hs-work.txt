@@ -26,12 +26,4 @@ The projects you want to open with the text editor.
 USAGE
 -----
 
-hs-work [-h]
-
-Required arguments:
-
-None
-
-Optional arguments:
-
---h, -h		Display this help documentation
+Check hs-work -h
