@@ -26,8 +26,8 @@ import os
 
 def get_all_files(directory, extensions):
     """
-    Returns a list of all the files from a directory and it's
-    sub-directories with a specific extension
+    Returns a list of all the files from a directory and it's sub-directories with one of the given extensions.
+    The sentence case of the extensions do not matter.
 
     Parameters:
             directory:
@@ -39,13 +39,12 @@ def get_all_files(directory, extensions):
                 Example: [".png", ".jpg"]
      """
 
+    extensions = [extension.lower() for extension in extensions]
     files = []
 
-    for file in os.listdir(directory):
-        file = os.path.join(directory, file)
-        if os.path.isdir(file):
-            files.extend(get_all_files(file, extensions))
-        elif os.path.splitext(file)[1].lower() in extensions:
-            files.append(file)
+    for base, dirs, walk_files in os.walk(directory):
+        for file in walk_files:
+            if os.path.splitext(file)[1].lower() in extensions:
+                files.append(os.path.join(base, file))
 
     return files
