@@ -27,5 +27,5 @@ To simply view the syntax of a command use the following syntax: `<command name>
 
 All contributions are welcomed. You can fork the repo add your own scripts (written in Python3) or bug fixes and make a pull request.
 
-Developer: Areeb Beigh <areebbeigh@gmail.com>
+Developer: Areeb Beigh <areebbeigh@gmail.com> <br>
 GitHub Repo: https://github.com/areeb-beigh/hacker-scripts
