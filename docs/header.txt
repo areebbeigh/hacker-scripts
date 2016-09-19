@@ -1,6 +1,6 @@
 ------------------------------------------
                                          
   * Python hacker-scripts by Areeb
-  * github.com/areeb-beigh
+  * github.com/areebbeigh/hacker-scripts
                                          
 ------------------------------------------

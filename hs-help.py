@@ -25,7 +25,7 @@ Prints a brief help documentation to the terminal
 
 def main():
     print("""
-    Python hacker-scripts by Areeb - github.com/areeb-beigh/hacker-scripts (Feel free to contribute)
+    Python hacker-scripts by Areeb - github.com/areebbeigh/hacker-scripts (Feel free to contribute)
 
     This is a collection of mini-scripts written in Python intended to make
     frequently used or random tasks such as playing music, launching programs you use
