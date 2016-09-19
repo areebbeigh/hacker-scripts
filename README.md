@@ -30,4 +30,4 @@ All contributions are welcomed. You can fork the repo add your own scripts (writ
 Cheers :coffee:
 
 Developer: Areeb Beigh <areebbeigh@gmail.com> <br>
-GitHub Repo: https://github.com/areeb-beigh/hacker-scripts
+GitHub Repo: https://github.com/areebbeigh/hacker-scripts
