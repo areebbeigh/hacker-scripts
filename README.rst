@@ -32,8 +32,7 @@ Contributing
 
 All contributions are welcomed. You can fork the repo add your own scripts (written in Python3) or bug fixes and make a pull request.
 
-Cheers 
+Cheers
 
-Developer: Areeb Beigh
-
-GitHub Repo: https://github.com/areebbeigh/hacker-scripts
+| Developer: Areeb Beigh
+| GitHub Repo: https://github.com/areebbeigh/hacker-scripts
