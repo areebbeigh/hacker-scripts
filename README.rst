@@ -6,10 +6,8 @@ if you are a lazy computer user (like me) and want things done just with a singl
 currently mostly contains scripts that work on Windows OS. 
 
 
-
 Installation
 -------------
-
 
 Simply download the hacker-scripts package and run the ``add_to_path.py`` script. This will add the hacker-scripts folder to the
 environment variable PATH. After this you should be able to run any of the ``hs-`` prefixed hacker-scripts from the PowerShell
@@ -19,7 +17,6 @@ After adding the directory to PATH the next thing you have to do is to configure
 to configure hacker-scripts run the ``hs-config`` command and a new config.ini file will be created in the hacker-scripts
 directory. Once this is done you can proceed with the configuration. The configuration also is a straight forward process, the 
 help docs are all available in the ``docs`` folder, you can refer to those for help.
-
 
 Usage
 -----
@@ -35,7 +32,8 @@ Contributing
 
 All contributions are welcomed. You can fork the repo add your own scripts (written in Python3) or bug fixes and make a pull request.
 
-Cheers :coffee:
+Cheers 
 
-|Developer: Areeb Beigh
-|GitHub Repo: https://github.com/areebbeigh/hacker-scripts
+Developer: Areeb Beigh
+
+GitHub Repo: https://github.com/areebbeigh/hacker-scripts
